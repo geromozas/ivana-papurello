@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   FormControl,
+  FormHelperText,
   Grid,
   IconButton,
   InputAdornment,
@@ -13,12 +14,51 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { register } from "../../../firebaseConfig";
 
 const Register = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
+
+  const { handleSubmit, handleChange, errors } = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    onSubmit: async (data) => {
+      try {
+        console.log("Registro exitoso");
+        const res = await register(data);
+        console.log(res);
+        if (res.user) {
+          navigate("/login");
+        } else {
+          console.log("No se pudo realizar el registro");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    validateOnChange: false,
+    validationSchema: Yup.object({
+      email: Yup.string().required("Campo requerido").email("Email invalido"),
+      password: Yup.string()
+        .required("Campo obligatorio")
+        .min(8, "Debe tener mas 8 o mas caracteres")
+        .matches(/[A-Z]/, "Debe tener al menos una letra mayuscula")
+        .matches(/[a-z]/, "Debe tener al menos una letra minuscula")
+        .matches(/\d/, "Debe tener al menos un numero"),
+      confirmPassword: Yup.string()
+        .required("Campo obligatorio")
+        .oneOf([Yup.ref("password")], "Las contraseñas no coinciden"),
+    }),
+  });
+  console.log(errors);
 
   return (
     <Box
@@ -32,7 +72,7 @@ const Register = () => {
         // backgroundColor: theme.palette.secondary.main,
       }}
     >
-      <form>
+      <form onSubmit={handleSubmit}>
         <Grid
           container
           rowSpacing={2}
@@ -40,14 +80,27 @@ const Register = () => {
           justifyContent={"center"}
         >
           <Grid item xs={10} md={12}>
-            <TextField name="email" label="Email" fullWidth />
+            <TextField
+              name="email"
+              label="Email"
+              fullWidth
+              onChange={handleChange}
+              error={errors.email ? true : false}
+              helperText={errors.email}
+            />
           </Grid>
           <Grid item xs={10} md={12}>
-            <FormControl variant="outlined" fullWidth>
+            <FormControl
+              variant="outlined"
+              fullWidth
+              error={errors.password ? true : false}
+            >
               <InputLabel htmlFor="outlined-adornment-password">
                 Contraseña
               </InputLabel>
               <OutlinedInput
+                onChange={handleChange}
+                error={errors.password ? true : false}
                 id="outlined-adornment-password"
                 type={showPassword ? "text" : "password"}
                 name="password"
@@ -68,14 +121,23 @@ const Register = () => {
                 }
                 label="Contraseña"
               />
+              {errors.password && (
+                <FormHelperText>{errors.password}</FormHelperText>
+              )}
             </FormControl>
           </Grid>
           <Grid item xs={10} md={12}>
-            <FormControl variant="outlined" fullWidth>
+            <FormControl
+              variant="outlined"
+              fullWidth
+              error={errors.password ? true : false}
+            >
               <InputLabel htmlFor="outlined-adornment-password">
                 Confirmar contraseña
               </InputLabel>
               <OutlinedInput
+                onChange={handleChange}
+                error={errors.confirmPassword ? true : false}
                 id="outlined-adornment-password"
                 type={showPassword ? "text" : "password"}
                 name="confirmPassword"
@@ -96,6 +158,9 @@ const Register = () => {
                 }
                 label="Confirmar contraseña"
               />
+              {errors.password && (
+                <FormHelperText>{errors.password}</FormHelperText>
+              )}
             </FormControl>
           </Grid>
           <Grid container justifyContent="center" spacing={3} mt={2}>
