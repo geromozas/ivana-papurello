@@ -75,7 +75,7 @@ function Navbar(props) {
         position="fixed"
         sx={{
           width: "100%",
-          backgroundColor: "#d1a4ac",
+          backgroundColor: "primary",
         }}
       >
         <Toolbar

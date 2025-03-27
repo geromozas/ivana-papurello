@@ -1,5 +1,5 @@
 import Card from "@mui/material/Card";
-// import CardActions from "@mui/material/CardActions";
+import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
@@ -57,9 +57,13 @@ export default function ProductCard({
           ${unit_price}
         </Typography>
       </CardContent>
-      <Link to={`/itemDetail/${id}`}>
-        <Button size="small">Ver Detalle</Button>
-      </Link>
+      <CardActions sx={{ padding: 2 }}>
+        <Link to={`/itemDetail/${id}`}>
+          <Button size="small" color="secondary" variant="contained">
+            Ver Detalle
+          </Button>
+        </Link>
+      </CardActions>
     </Card>
   );
 }

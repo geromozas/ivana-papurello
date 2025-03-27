@@ -1,9 +1,6 @@
-
 const Home = () => {
-
-
   return (
-    <div>
+    <div style={{ marginTop: 20 }}>
       <h1>Este es el home</h1>
     </div>
   );
