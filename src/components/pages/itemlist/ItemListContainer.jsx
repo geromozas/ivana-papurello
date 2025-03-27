@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { db } from "../../../firebaseConfig";
 import { getDocs, collection } from "firebase/firestore";
+import ProductCard from "../../productCard/ProductCard";
 
 const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
@@ -21,7 +22,31 @@ const ItemListContainer = () => {
 
   return (
     <div>
-      <h1>Estoy en el shop</h1>
+      <h1 style={{ marginBottom: 20 }}>Estoy en el shop</h1>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: "20px",
+          justifyContent: "center",
+          alignItems: "center",
+          maxWidth: "800px",
+          margin: "0 auto",
+        }}
+      >
+        {products.map((product) => {
+          return (
+            <ProductCard
+              key={product.id}
+              image={product.image}
+              title={product.title}
+              description={product.description}
+              unit_price={product.unit_price}
+              id={product.id}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

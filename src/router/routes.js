@@ -1,4 +1,5 @@
 import Home from "../components/pages/home/Home";
+import ItemDetail from "../components/pages/itemDetail/ItemDetail";
 import ItemListContainer from "../components/pages/itemlist/ItemListContainer";
 
 export const routes = [
@@ -11,5 +12,10 @@ export const routes = [
     id: "shop",
     path: "/shop",
     Element: ItemListContainer,
+  },
+  {
+    id: "detail",
+    path: "/itemDetail/:id",
+    Element: ItemDetail,
   },
 ];

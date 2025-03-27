@@ -44,9 +44,9 @@ function Navbar(props) {
               <ListItem disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
-                    <Icon sx={{ color: "whitesmoke" }} />
+                    <Icon sx={{ color: "black" }} />
                   </ListItemIcon>
-                  <ListItemText primary={title} sx={{ color: "whitesmoke" }} />
+                  <ListItemText primary={title} sx={{ color: "black" }} />
                 </ListItemButton>
               </ListItem>
             </Link>
@@ -56,12 +56,9 @@ function Navbar(props) {
         <ListItem disablePadding>
           <ListItemButton onClick={handleLogOut}>
             <ListItemIcon>
-              <LogoutIcon sx={{ color: "whitesmoke" }} />
+              <LogoutIcon sx={{ color: "black" }} />
             </ListItemIcon>
-            <ListItemText
-              primary={"Cerrar sesion"}
-              sx={{ color: "whitesmoke" }}
-            />
+            <ListItemText primary={"Cerrar sesion"} sx={{ color: "black" }} />
           </ListItemButton>
         </ListItem>
       </List>
@@ -78,13 +75,22 @@ function Navbar(props) {
         position="fixed"
         sx={{
           width: "100%",
+          backgroundColor: "#d1a4ac",
         }}
       >
         <Toolbar
-          sx={{ gap: "20px", display: "flex", justifyContent: "space-between" }}
+          sx={{
+            gap: "20px",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
         >
-          <Link to="/" style={{ color: "whitesmoke" }}>
-            Bazar-deco
+          <Link to="/" style={{ color: "black" }}>
+            <img
+              style={{ width: 100, padding: "5px", borderRadius: "10px" }}
+              src="https://firebasestorage.googleapis.com/v0/b/ivana-papurello.firebasestorage.app/o/ivana-papurello-logo.jpeg?alt=media&token=b3d2e5fd-2c34-4507-a008-b11927a126c3"
+              alt=""
+            />
           </Link>
           <IconButton
             color="secondary.primary"
@@ -111,7 +117,7 @@ function Navbar(props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
-              backgroundColor: "#1976d2",
+              backgroundColor: "#F4D4CF",
             },
           }}
         >
