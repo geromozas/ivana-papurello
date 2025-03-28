@@ -1,14 +1,15 @@
 import { Route, Routes } from "react-router-dom";
-import Navbar from "../components/layout/navbar/Navbar";
+// import Navbar from "../components/layout/navbar/Navbar";
 import { routes } from "./routes";
 import Login from "../components/pages/login/Login";
 import Register from "../components/pages/register/Register";
 import ForgotPassword from "../components/pages/forgotPassword/ForgotPassword";
+import Layout from "../components/layout/Layout";
 
 const AppRouter = () => {
   return (
     <Routes>
-      <Route element={<Navbar />}>
+      <Route element={<Layout />}>
         {routes.map(({ id, path, Element }) => (
           <Route key={id} path={path} element={<Element />} />
         ))}

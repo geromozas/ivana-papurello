@@ -22,7 +22,24 @@ const ItemListContainer = () => {
 
   return (
     <div>
-      <h1 style={{ marginBottom: 20 }}>Estoy en el shop</h1>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          marginTop: 40,
+          marginBottom: 40,
+          backgroundColor: "#F4D4CF",
+          opacity: 0.8,
+          padding: 20,
+        }}
+      >
+        <h1 style={{ marginBottom: 5 }}>Nuestros Servicios</h1>
+        <p>
+          Descubre nuestra amplia gama de cursos, talleres y formaciones
+          diseñados para tu crecimiento personal y bienestar integral.
+        </p>
+      </div>
       <div
         style={{
           display: "grid",
