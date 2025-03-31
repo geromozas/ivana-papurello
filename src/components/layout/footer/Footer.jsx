@@ -20,7 +20,7 @@ const Footer = () => {
         </div>
         <div>
           <h4 style={{ color: "#d1a4ac" }}>Enlaces Rápidos</h4>
-          <ul>
+          <ul style={{ listStyleType: "none" }}>
             <a href="/" style={{ color: "white" }}>
               <li>Inicio</li>
             </a>

@@ -1,6 +1,12 @@
 import { Button } from "@mui/material";
 
-const ProductCardDetail = ({ title, description, unit_price, image }) => {
+const ProductCardDetail = ({
+  title,
+  description,
+  unit_price,
+  image,
+  addToCart,
+}) => {
   return (
     <div>
       <h1 style={{ justifySelf: "center", marginBottom: 40 }}>{title}</h1>
@@ -19,7 +25,9 @@ const ProductCardDetail = ({ title, description, unit_price, image }) => {
               <Button style={{ marginRight: 20 }} variant="contained">
                 Comprar
               </Button>
-              <Button variant="outlined">Añadir al carrito</Button>
+              <Button variant="outlined" onClick={addToCart}>
+                Añadir al carrito
+              </Button>
             </div>
             <p style={{ marginTop: 20 }}>
               ¿Tenes dudas?{" "}

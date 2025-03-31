@@ -16,7 +16,18 @@ const ItemDetail = () => {
       .catch((err) => console.log(err));
   }, [id]);
 
-  console.log(product);
+  // console.log(product);
+
+  //agregar al carrito
+  const addToCart = () => {
+    if (product) {
+      let obj = {
+        ...product,
+        quantity: 1,
+      };
+      console.log("Producto añadido al carrito", obj);
+    }
+  };
 
   return (
     <div style={{ marginTop: 40 }}>
@@ -27,6 +38,7 @@ const ItemDetail = () => {
             description={product.description}
             unit_price={product.unit_price}
             image={product.image}
+            addToCart={addToCart}
           />
         </div>
       )}
