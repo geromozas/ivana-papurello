@@ -40,7 +40,7 @@ const ItemDetail = () => {
           <ProductCardDetail
             title={product.title}
             description={product.description}
-            unit_price={product.unit_price}
+            unit_price={product.unit_price} 
             image={product.image}
             addToCart={addToCart}
           />

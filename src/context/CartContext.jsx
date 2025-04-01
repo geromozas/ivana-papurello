@@ -6,7 +6,12 @@ const CartContextComponent = ({ children }) => {
   const [cart, setCart] = useState([]);
 
   const addToCartContext = (product) => {
-    setCart([...cart, product]);
+    let existe = cart.some((e) => e.id === product.id);
+    if (existe) {
+      alert("Ya agregaste este producto al carrito");
+    } else {
+      setCart([...cart, product]);
+    }
   };
 
   let data = {
