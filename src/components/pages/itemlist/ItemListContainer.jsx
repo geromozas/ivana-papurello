@@ -18,8 +18,6 @@ const ItemListContainer = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(products);
-
   return (
     <div>
       <div

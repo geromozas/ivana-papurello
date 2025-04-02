@@ -4,8 +4,8 @@ import ProductCardCart from "../../productCard/ProductCardCart";
 import { Button } from "@mui/material";
 
 const Cart = () => {
-  const { cart } = useContext(CartContext);
-
+  const { cart, clearCart, getTotalPrice } = useContext(CartContext);
+  let total = getTotalPrice();
   return (
     <div style={{ marginTop: 40 }}>
       <div
@@ -34,20 +34,37 @@ const Cart = () => {
                   image={product.image}
                   title={product.title}
                   unit_price={product.unit_price}
+                  id={product.id}
                 />
               );
             })}
             <a href="/shop">
-              <Button style={{ marginTop: 30 }}>⬅ Continuar comprando</Button>
+              <Button variant="outlined" style={{ marginTop: 30 }}>
+                ⬅ Continuar comprando
+              </Button>
             </a>
+            <Button
+              variant="contained"
+              style={{ marginTop: 30, marginLeft: 30 }}
+              onClick={clearCart}
+            >
+              Vaciar Carrito
+            </Button>
           </div>
           <div style={{ height: 150 }}>
             <h2>Resumen del pedido</h2>
             <hr style={{ marginBottom: 20, marginTop: 20 }} />
-            <h3 style={{ marginBottom: 20 }}>Total:</h3>
-            <Button variant="outlined">Proceder al pago</Button>
-            <p style={{ marginTop: 20 }}>Pago 100% seguro</p>
-            <Button>Continuar comprando</Button>
+            <h3 style={{ marginBottom: 20 }}>Total: ${total}</h3>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Button variant="outlined">Proceder al pago</Button>
+              <p style={{ marginTop: 20 }}>Pago 100% seguro</p>
+            </div>
           </div>
         </div>
       </div>

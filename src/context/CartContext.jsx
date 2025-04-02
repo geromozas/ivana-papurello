@@ -14,9 +14,31 @@ const CartContextComponent = ({ children }) => {
     }
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
+  const deleteById = (id) => {
+    console.log("Estado actual del carrito: ", cart);
+    const newArr = cart.filter((elemento) => elemento.id !== id);
+    console.log("Nuevo carrito despues de eliminar: ", newArr);
+    setCart(newArr);
+    alert("El producto se elimino");
+  };
+
+  const getTotalPrice = () => {
+    const total = cart.reduce((acc, elemento) => {
+      return acc + elemento.unit_price;
+    }, 0);
+    return total;
+  };
+
   let data = {
     cart,
     addToCartContext,
+    clearCart,
+    deleteById,
+    getTotalPrice,
   };
 
   return <CartContext.Provider value={data}>{children}</CartContext.Provider>;
