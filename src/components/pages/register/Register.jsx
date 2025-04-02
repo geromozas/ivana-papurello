@@ -16,7 +16,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { register } from "../../../firebaseConfig";
+import { register } from "../../../firebaseConfig.js";
 
 const Register = () => {
   const navigate = useNavigate();

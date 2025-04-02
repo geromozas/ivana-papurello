@@ -1,8 +1,8 @@
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
-import { db } from "../../../firebaseConfig";
+import { db } from "../../../firebaseConfig.js";
 import { getDocs, collection, limit, query } from "firebase/firestore";
-import ProductCard from "../../productCard/ProductCard";
+import ProductCard from "../../productCard/ProductCard.jsx";
 
 const Home = () => {
   const [products, setProducts] = useState([]);

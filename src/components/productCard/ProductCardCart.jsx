@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { useContext } from "react";
-import { CartContext } from "../../context/CartContext";
+import { CartContext } from "../../context/CartContext.jsx";
 
 const ProductCardCart = ({ title, unit_price, image, id }) => {
   const { deleteById } = useContext(CartContext);

@@ -15,8 +15,8 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { useState } from "react";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { menuItems } from "../../../router/navigation";
-import { logOut } from "../../../firebaseConfig";
+import { menuItems } from "../../../router/navigation.js";
+import { logOut } from "../../../firebaseConfig.js";
 const drawerWidth = 200;
 
 function Navbar(props) {

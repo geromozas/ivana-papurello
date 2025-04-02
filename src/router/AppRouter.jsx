@@ -1,10 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-// import Navbar from "../components/layout/navbar/Navbar";
-import { routes } from "./routes";
-import Login from "../components/pages/login/Login";
-import Register from "../components/pages/register/Register";
-import ForgotPassword from "../components/pages/forgotPassword/ForgotPassword";
-import Layout from "../components/layout/Layout";
+import { routes } from "./routes.js";
+import Login from "../components/pages/login/Login.jsx";
+import Register from "../components/pages/register/Register.jsx";
+import ForgotPassword from "../components/pages/forgotPassword/ForgotPassword.jsx";
+import Layout from "../components/layout/Layout.jsx";
 
 const AppRouter = () => {
   return (
