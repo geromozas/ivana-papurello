@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { CartContext } from "../../../context/CartContext.jsx";
-import ProductCardCart from "../../productCard/ProductCardCart.jsx";
+import ProductCardCart from "../../productCardCart/ProductCardCart.jsx";
 import { Button } from "@mui/material";
 
 const Cart = () => {

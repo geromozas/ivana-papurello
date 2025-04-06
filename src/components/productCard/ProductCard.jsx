@@ -16,8 +16,12 @@ export default function ProductCard({
 }) {
   return (
     <Card
+      className="productCard"
       sx={{
-        width: 400,
+        width: {
+          xs: 275,
+          sm: 400,
+        },
         marginBottom: 10,
         boxShadow: 3,
         transition: "transform 0.2s ease-in-out",

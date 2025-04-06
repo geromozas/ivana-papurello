@@ -1,0 +1,10 @@
+.titleShop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  background-color: #f4d4cf;
+  opacity: 0.8;
+  padding: 20px;
+}

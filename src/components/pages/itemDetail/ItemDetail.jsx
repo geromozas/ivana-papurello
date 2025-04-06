@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getDoc, collection, doc } from "firebase/firestore";
 import { db } from "../../../firebaseConfig.js";
-import ProductCardDetail from "../../productCard/ProductCardDetail.jsx";
+import ProductCardDetail from "../../productCardDetail/ProductCardDetail.jsx";
 import { CartContext } from "../../../context/CartContext.jsx";
 
 const ItemDetail = () => {

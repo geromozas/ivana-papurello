@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { db } from "../../../firebaseConfig.js";
 import { getDocs, collection, limit, query } from "firebase/firestore";
 import ProductCard from "../../productCard/ProductCard.jsx";
+import "./Home.css";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -25,36 +26,44 @@ const Home = () => {
   console.log(products);
 
   return (
-    <div style={{ marginTop: 100 }}>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <div style={{ marginTop: 50 }}>
-          <h1 style={{ width: 600 }}>
+    <div id="boxHome">
+      <div className="homeStart">
+        <div className="boxTextHome">
+          <h1 className="titleHome">
             Transforma tu vida con nuestros cursos de sanación y bienestar
           </h1>
-          <p style={{ width: 600 }}>
+          <p className="textInitialHome">
             Descubre el poder de la bideocodificación, sanación energética y
             liberación emocional para alcanzar tu máximo potencial.
           </p>
-          <div style={{ marginTop: 20 }}>
-            <Button variant="contained" style={{ marginRight: 20 }}>
+          <div className="buttonsHome">
+            <Button
+              size="small"
+              variant="contained"
+              style={{ marginRight: 20 }}
+            >
               Explorar cursos
             </Button>
-            <Button variant="contained">Conoce más</Button>
+            <Button size="small" variant="contained">
+              Conoce más
+            </Button>
           </div>
         </div>
         <img
-          style={{ width: 600, height: 400, borderRadius: 10 }}
           src="https://firebasestorage.googleapis.com/v0/b/ivana-papurello.firebasestorage.app/o/placeholder.jpg?alt=media&token=7097dce0-42fb-4ceb-93f1-1f11ca1fb7ee"
           alt=""
+          className="imgHome"
         />
       </div>
       <div
         style={{
           marginTop: 50,
           backgroundColor: "#F4D4CF",
+          borderRadius: "10px",
         }}
       >
         <h1
+          className="outStanding"
           style={{
             justifySelf: "center",
             padding: 30,
@@ -62,7 +71,13 @@ const Home = () => {
         >
           Lo más destacado
         </h1>
-        <div style={{ display: "flex", justifyContent: "space-around" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            flexWrap: "wrap",
+          }}
+        >
           {products.map((product) => {
             return (
               <ProductCard

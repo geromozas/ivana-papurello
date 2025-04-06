@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { db } from "../../../firebaseConfig.js";
 import { getDocs, collection } from "firebase/firestore";
 import ProductCard from "../../productCard/ProductCard.jsx";
+import "./ItemListContainer.css";
 
 const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
@@ -20,18 +21,7 @@ const ItemListContainer = () => {
 
   return (
     <div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          marginTop: 40,
-          marginBottom: 40,
-          backgroundColor: "#F4D4CF",
-          opacity: 0.8,
-          padding: 20,
-        }}
-      >
+      <div className="titleShop">
         <h1 style={{ marginBottom: 5 }}>Nuestros Servicios</h1>
         <p>
           Descubre nuestra amplia gama de cursos, talleres y formaciones
