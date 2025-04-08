@@ -21,24 +21,16 @@ const ItemListContainer = () => {
 
   return (
     <div>
-      <div className="titleShop">
-        <h1 style={{ marginBottom: 5 }}>Nuestros Servicios</h1>
-        <p>
+      <div className="boxTitleShop">
+        <h1 className="titleShop" style={{ marginBottom: 5 }}>
+          Nuestros Servicios
+        </h1>
+        <p className="textInitialShop">
           Descubre nuestra amplia gama de cursos, talleres y formaciones
           diseñados para tu crecimiento personal y bienestar integral.
         </p>
       </div>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "20px",
-          justifyContent: "center",
-          alignItems: "center",
-          maxWidth: "800px",
-          margin: "0 auto",
-        }}
-      >
+      <div className="boxProducts">
         {products.map((product) => {
           return (
             <ProductCard

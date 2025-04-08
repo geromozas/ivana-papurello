@@ -22,7 +22,8 @@ export default function ProductCard({
           xs: 275,
           sm: 400,
         },
-        marginBottom: 10,
+
+        marginBottom: 5,
         boxShadow: 3,
         transition: "transform 0.2s ease-in-out",
         cursor: "pointer",

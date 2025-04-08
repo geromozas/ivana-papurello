@@ -1,11 +1,41 @@
-.titleShop {
+.boxTitleShop {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   margin-top: 40px;
   margin-bottom: 40px;
   background-color: #f4d4cf;
   opacity: 0.8;
   padding: 20px;
   border-radius: 10px;
+}
+
+.boxProducts {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+/* @media (max-width: 1050px) {
+  .titleShop {
+    font-size: 25px;
+    width: 400px;
+  }
+  .textInitialShop {
+    font-size: 15px;
+    width: 400px;
+  }
+} */
+@media (max-width: 450px) {
+  .titleShop {
+    font-size: 25px;
+  }
+  .textInitialShop {
+    font-size: 15px;
+    /* width: 250px; */
+  }
 }
