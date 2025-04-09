@@ -27,7 +27,7 @@ const Footer = () => {
             <a href="/shop" style={{ color: "white" }}>
               <li>Tienda</li>
             </a>
-            <a href="" style={{ color: "white" }}>
+            <a href="/cart" style={{ color: "white" }}>
               <li>Carrito</li>
             </a>
             <a href="" style={{ color: "white" }}>
