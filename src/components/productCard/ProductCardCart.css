@@ -1,0 +1,16 @@
+.boxProductCard {
+  display: flex;
+  justify-content: center;
+}
+
+.subBoxProductCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgCart {
+  width: 100px;
+  margin-right: 75px;
+  border-radius: 10px;
+}

@@ -11,8 +11,12 @@ const Cart = () => {
   return (
     <div style={{ marginTop: 40 }}>
       <div className="boxTitleCart">
-        <h1 style={{ marginBottom: 5 }}>Tu Carrito</h1>
-        <p>Revisa tus productos seleccionados y procede al pago</p>
+        <h1 className="titleCart" style={{ marginBottom: 5 }}>
+          Tu Carrito
+        </h1>
+        <p className="textTitleCart">
+          Revisa tus productos seleccionados y procede al pago
+        </p>
       </div>
       <div>
         <div>
@@ -43,26 +47,28 @@ const Cart = () => {
                     />
                   );
                 })}
-                <a href="/shop">
-                  <Button variant="outlined" style={{ marginTop: 30 }}>
-                    ⬅ Continuar comprando
-                  </Button>
-                </a>
-                <Button
-                  variant="contained"
-                  style={{ marginTop: 30, marginLeft: 30 }}
-                  onClick={clearCart}
-                >
-                  Vaciar Carrito
-                </Button>
+                <div className="boxButtonsCart">
+                  <div>
+                    <a href="/shop">
+                      <Button variant="outlined" style={{ marginTop: 30 }}>
+                        ⬅ Continuar comprando
+                      </Button>
+                    </a>
+                  </div>
+                  <div className="buttonEmptyCart">
+                    <Button variant="contained" onClick={clearCart}>
+                      Vaciar Carrito
+                    </Button>
+                  </div>
+                </div>
               </div>
-              <div className="boxTotalOrder">
-                <h2>Resumen del pedido</h2>
-                <hr style={{ marginBottom: 20, marginTop: 20 }} />
+              <div className="boxTotalOrder" style={{ marginBottom: 50 }}>
+                <h2 style={{ marginTop: 25 }}>Resumen del pedido</h2>
+                <hr style={{ marginBottom: 10, marginTop: 10 }} />
                 <h3 style={{ marginBottom: 20 }}>Total: ${total}</h3>
                 <div className="boxPay">
                   <Button variant="outlined">Proceder al pago</Button>
-                  <p style={{ marginTop: 20 }}>Pago 100% seguro</p>
+                  <p style={{ marginTop: 10 }}>Pago 100% seguro</p>
                 </div>
               </div>
             </div>
