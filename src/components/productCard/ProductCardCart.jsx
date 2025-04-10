@@ -6,19 +6,20 @@ import "./ProductCardCart.css";
 const ProductCardCart = ({ title, unit_price, image, id }) => {
   const { deleteById } = useContext(CartContext);
   return (
+    // <div className="boxProductCard">
     <div className="boxProductCard">
-      <div style={{ height: 150 }}>
-        <hr style={{ marginBottom: 10, marginTop: 10 }} />
-        <div className="subBoxProductCard">
-          <img className="imgCart" src={image} alt="" />
-          <div style={{ marginRight: 100 }}>
-            <h4 style={{ marginBottom: 20 }}>{title}</h4>
-            <p>${unit_price}</p>
-          </div>
+      <hr style={{ marginBottom: 10, marginTop: 10 }} />
+      <div className="subBoxProductCard">
+        <img className="imgCart" src={image} alt="" />
+        <div className="boxImgTitlePrice">
+          <h4 style={{ marginBottom: 20 }}>{title}</h4>
+          <p>${unit_price}</p>
+        </div>
+        <div>
           <Button
             size="small"
             variant="contained"
-            style={{ height: 40 }}
+            style={{ height: 30 }}
             onClick={() => deleteById(id)}
           >
             Eliminar
@@ -26,6 +27,7 @@ const ProductCardCart = ({ title, unit_price, image, id }) => {
         </div>
       </div>
     </div>
+    // </div>
   );
 };
 
