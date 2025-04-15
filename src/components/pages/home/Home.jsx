@@ -4,6 +4,7 @@ import { db } from "../../../firebaseConfig.js";
 import { getDocs, collection, limit, query } from "firebase/firestore";
 import ProductCard from "../../productCard/ProductCard.jsx";
 import "./Home.css";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -37,16 +38,20 @@ const Home = () => {
             liberación emocional para alcanzar tu máximo potencial.
           </p>
           <div className="buttonsHome">
-            <Button
-              size="small"
-              variant="contained"
-              style={{ marginRight: 20 }}
-            >
-              Explorar cursos
-            </Button>
-            <Button size="small" variant="contained">
-              Conoce más
-            </Button>
+            <Link to={"/shop"}>
+              <Button
+                size="small"
+                variant="contained"
+                style={{ marginRight: 20 }}
+              >
+                Explorar cursos
+              </Button>
+            </Link>
+            <Link to={"/about-me"}>
+              <Button size="small" variant="contained">
+                Conoce más
+              </Button>
+            </Link>
           </div>
         </div>
         <img

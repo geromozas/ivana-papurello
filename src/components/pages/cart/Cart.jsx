@@ -49,11 +49,11 @@ const Cart = () => {
                 })}
                 <div className="boxButtonsCart">
                   <div>
-                    <a href="/shop">
+                    <Link to="/shop">
                       <Button variant="outlined" style={{ marginTop: 30 }}>
                         ⬅ Continuar comprando
                       </Button>
-                    </a>
+                    </Link>
                   </div>
                   <div className="buttonEmptyCart">
                     <Button variant="contained" onClick={clearCart}>
@@ -67,7 +67,9 @@ const Cart = () => {
                 <hr style={{ marginBottom: 10, marginTop: 10 }} />
                 <h3 style={{ marginBottom: 20 }}>Total: ${total}</h3>
                 <div className="boxPay">
-                  <Button variant="outlined">Proceder al pago</Button>
+                  <Link to="/checkout">
+                    <Button variant="outlined">Proceder al pago</Button>
+                  </Link>
                   <p style={{ marginTop: 10 }}>Pago 100% seguro</p>
                 </div>
               </div>
