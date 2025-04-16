@@ -7,7 +7,7 @@ import { Button } from "@mui/material";
 const Checkout = () => {
   const { cart } = useContext(CartContext);
 
-  initMercadoPago("APP_USR-63ef46aa-4d68-4990-83eb-43a58656147a", {
+  initMercadoPago(import.meta.env.VITE_PUBLIC_KEY, {
     locale: "es-AR",
   });
 

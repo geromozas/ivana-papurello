@@ -13,12 +13,12 @@ import {
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDLYnN9AZksfUXKhFC7PCap4u8vJUpeQmE",
-  authDomain: "ivana-papurello.firebaseapp.com",
-  projectId: "ivana-papurello",
-  storageBucket: "ivana-papurello.firebasestorage.app",
-  messagingSenderId: "199396629923",
-  appId: "1:199396629923:web:ad11ed7aad78a3e01cce16",
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
 };
 
 // Initialize Firebase
