@@ -13,16 +13,22 @@ import Toolbar from "@mui/material/Toolbar";
 
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./Navbar.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { menuItems } from "../../../router/navigation.js";
 import { logOut } from "../../../firebaseConfig.js";
+import { AuthContext } from "../../../context/AuthContext.jsx";
+
+import DashboardIcon from "@mui/icons-material/Dashboard";
 const drawerWidth = 200;
 
 function Navbar(props) {
+  const { logoutContext, user } = useContext(AuthContext);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
+
+  const rolAdmin = import.meta.env.VITE_ROL_ADMIM;
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -30,6 +36,7 @@ function Navbar(props) {
 
   const handleLogOut = () => {
     logOut();
+    logoutContext();
     navigate("/login");
   };
 
@@ -52,6 +59,19 @@ function Navbar(props) {
             </Link>
           );
         })}
+
+        {user.rol === rolAdmin && (
+          <Link to={"/dashboard"}>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <DashboardIcon sx={{ color: "black" }} />
+                </ListItemIcon>
+                <ListItemText primary={"Dashboard"} sx={{ color: "black" }} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+        )}
 
         <ListItem disablePadding>
           <ListItemButton onClick={handleLogOut}>

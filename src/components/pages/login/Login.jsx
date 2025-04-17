@@ -16,12 +16,15 @@ import GoogleIcon from "@mui/icons-material/Google";
 
 import { Link, useNavigate } from "react-router-dom";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useState } from "react";
-import { logInGoogle, onSignIn } from "../../../firebaseConfig.js";
+import { useContext, useState } from "react";
+import { db, logInGoogle, onSignIn } from "../../../firebaseConfig.js";
+import { collection, doc, getDoc } from "firebase/firestore";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { AuthContext } from "../../../context/AuthContext.jsx";
 
 const Login = () => {
+  const { handleLogin } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
@@ -38,6 +41,15 @@ const Login = () => {
         const res = await onSignIn(data);
         console.log(res);
         if (res.user) {
+          const userCollection = collection(db, "users");
+          const userRef = doc(userCollection, res.user.uid);
+          const userDoc = await getDoc(userRef);
+          let finalyUser = {
+            email: res.user.email,
+            rol: userDoc.data().rol,
+          };
+          console.log(finalyUser);
+          handleLogin(finalyUser);
           navigate("/");
         } else {
           console.log(
@@ -55,7 +67,7 @@ const Login = () => {
     }),
   });
 
-  console.log(errors);
+  // console.log(errors);
 
   const googleSingIn = async () => {
     const res = await logInGoogle();
