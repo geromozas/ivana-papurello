@@ -16,7 +16,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { register } from "../../../firebaseConfig.js";
+import { register, db } from "../../../firebaseConfig.js";
+import { setDoc, doc } from "firebase/firestore";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -35,6 +36,9 @@ const Register = () => {
         console.log("Registro exitoso");
         const res = await register(data);
         console.log(res);
+        if (res.user.uid) {
+          await setDoc(doc(db, "users", res.user.uid), { rol: "user" });
+        }
         if (res.user) {
           navigate("/login");
         } else {
@@ -42,7 +46,7 @@ const Register = () => {
         }
       } catch (error) {
         console.log(error);
-      }
+      } 
     },
     validateOnChange: false,
     validationSchema: Yup.object({
