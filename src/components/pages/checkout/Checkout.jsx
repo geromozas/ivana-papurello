@@ -10,7 +10,7 @@ const Checkout = () => {
   initMercadoPago(import.meta.env.VITE_PUBLIC_KEY, {
     locale: "es-AR",
   });
-
+  console.log("MP PUBLIC KEY:", import.meta.env.VITE_PUBLIC_KEY);
   const [preferenceId, setPreferenceId] = useState(null);
 
   const createPreference = async () => {
