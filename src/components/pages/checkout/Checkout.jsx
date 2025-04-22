@@ -58,7 +58,10 @@ const Checkout = () => {
 
     try {
       let res = await axios.post(
-        "https://backend-ivana-papurello-oxkjoufpx-geromozas-projects.vercel.app/create_preference",
+        "https://backend-ivana-papurello-vercel.app/create_preference",
+        // backend-ivana-papurello.vercel.app
+
+        // "http://localhost:8080/create_preference",
         {
           items: newArray,
         }
