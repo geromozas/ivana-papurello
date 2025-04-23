@@ -46,7 +46,7 @@ const Register = () => {
         }
       } catch (error) {
         console.log(error);
-      } 
+      }
     },
     validateOnChange: false,
     validationSchema: Yup.object({
@@ -76,6 +76,9 @@ const Register = () => {
         // backgroundColor: theme.palette.secondary.main,
       }}
     >
+      <h1 style={{ marginBottom: 60, color: "#d1a4ac", fontSize: 50 }}>
+        Ivana Papurello
+      </h1>
       <form onSubmit={handleSubmit}>
         <Grid
           container
