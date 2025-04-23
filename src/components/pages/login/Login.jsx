@@ -71,7 +71,12 @@ const Login = () => {
 
   const googleSingIn = async () => {
     const res = await logInGoogle();
-    console.log(res);
+    let finalyUser = {
+      email: res.user.email,
+      rol: "user",
+    };
+    handleLogin(finalyUser);
+    navigate("/");
   };
 
   return (

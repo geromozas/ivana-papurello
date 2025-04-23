@@ -83,6 +83,7 @@ const Checkout = () => {
       email: user.email,
     };
     localStorage.setItem("order", JSON.stringify(order));
+
     const id = await createPreference();
     if (id) {
       setPreferenceId(id);
@@ -126,21 +127,26 @@ const Checkout = () => {
         </>
       ) : (
         <>
-          <h4>El pago se realizo con exito</h4>
-          <h4>Su orden de compra es {orderId}</h4>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <h4>El pago se realizo con exito</h4>
+            <h4>Su orden de compra es {orderId}</h4>
+          </div>
         </>
       )}
-      {/* <h1> */}
-
       {preferenceId && (
         <Wallet
           initialization={{
             preferenceId: preferenceId,
-            // redirectMode: "self",
+            redirectMode: "self",
           }}
         />
       )}
-      {/* </h1> */}
     </div>
   );
 };
