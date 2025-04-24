@@ -22,8 +22,10 @@ const Dashboard = () => {
   console.log(products);
 
   return (
-    <div style={{ marginTop: "40" }}>
+    <div style={{ marginTop: "50" }}>
+      {/* <div className="boxTitleMyOrders"> */}
       <h1>Dashboard</h1>
+      {/* </div> */}
       <ProductsList products={products} />
     </div>
   );

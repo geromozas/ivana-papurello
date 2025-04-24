@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { db } from "../../../firebaseConfig";
 import { getDocs, collection, query, where } from "firebase/firestore";
+import "./UserOrders.css";
 
 const UserOrders = () => {
   const [myOrders, setMyOrders] = useState([]);
@@ -24,8 +25,10 @@ const UserOrders = () => {
   }, [user.email]);
 
   return (
-    <div>
-      <h1>Estoy en mi ordenes</h1>
+    <div style={{ marginTop: 40 }}>
+      <div className="boxTitleMyOrders">
+        <h1>Mis compras</h1>
+      </div>
       {myOrders.map((order) => {
         return (
           <div key={order.id} style={{ border: "2px solid black" }}>
@@ -33,7 +36,7 @@ const UserOrders = () => {
               return (
                 <div key={product.id}>
                   <h2>{product.title}</h2>
-                  <h3>{product.iamge}</h3>
+                  <img src={product.image} alt="" />
                 </div>
               );
             })}

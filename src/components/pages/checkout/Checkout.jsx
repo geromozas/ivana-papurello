@@ -78,7 +78,8 @@ const Checkout = () => {
     let order = {
       name: userData.name,
       lastName: userData.lastName,
-      phone: cart,
+      phone: userData.phone,
+      items: cart,
       total: total,
       email: user.email,
     };
