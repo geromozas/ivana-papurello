@@ -36,7 +36,7 @@ const UserOrders = () => {
               return (
                 <div key={product.id}>
                   <h2>{product.title}</h2>
-                  <img src={product.image} alt="" />
+                  <img src={product.image} alt="imagen producto" />
                 </div>
               );
             })}
