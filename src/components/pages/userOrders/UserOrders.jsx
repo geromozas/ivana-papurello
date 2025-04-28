@@ -49,10 +49,18 @@ const UserOrders = () => {
               <TableHead>
                 <TableRow>
                   {/* <TableCell align="left">ID de Orden</TableCell> */}
-                  <TableCell align="left">Producto</TableCell>
-                  <TableCell align="left">Imagen</TableCell>
-                  <TableCell align="left">Precio</TableCell>
-                  <TableCell align="left">Total de Orden</TableCell>
+                  <TableCell align="left" style={{ fontSize: 25 }}>
+                    Producto
+                  </TableCell>
+                  <TableCell align="left" style={{ fontSize: 25 }}>
+                    Imagen
+                  </TableCell>
+                  <TableCell align="left" style={{ fontSize: 25 }}>
+                    Precio
+                  </TableCell>
+                  <TableCell align="left" style={{ fontSize: 25 }}>
+                    Total de Orden
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -60,16 +68,26 @@ const UserOrders = () => {
                   order.items.map((product) => (
                     <TableRow key={`${order.id}-${product.id}`}>
                       {/* <TableCell align="left">{order.id}</TableCell> */}
-                      <TableCell align="left">{product.title}</TableCell>
+                      <TableCell align="left" style={{ fontSize: 20 }}>
+                        {product.title}
+                      </TableCell>
                       <TableCell align="left">
                         <img
                           src={product.image}
                           alt="imagen producto"
-                          style={{ width: 80, height: 80, borderRadius: 8 }}
+                          style={{
+                            width: 100,
+                            height: 150,
+                            borderRadius: 8,
+                          }}
                         />
                       </TableCell>
-                      <TableCell align="left">${product.unit_price}</TableCell>
-                      <TableCell align="left">${order.total}</TableCell>
+                      <TableCell align="left" style={{ fontSize: 20 }}>
+                        ${product.unit_price}
+                      </TableCell>
+                      <TableCell align="left" style={{ fontSize: 20 }}>
+                        ${order.total}
+                      </TableCell>
                     </TableRow>
                   ))
                 )}

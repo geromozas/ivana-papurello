@@ -65,15 +65,7 @@ const Home = () => {
           borderRadius: "10px",
         }}
       >
-        <h1
-          className="outStanding"
-          style={{
-            justifySelf: "center",
-            padding: 30,
-          }}
-        >
-          Lo más destacado
-        </h1>
+        <h1 className="outStanding">Lo más destacado</h1>
         <div
           style={{
             display: "flex",
