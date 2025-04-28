@@ -37,7 +37,7 @@ const ItemListContainer = () => {
               key={product.id}
               image={product.image}
               title={product.title}
-              description={product.description}
+              description={product.description_small}
               unit_price={product.unit_price}
               id={product.id}
             />

@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import "./AboutMe.css";
-//FDF8F8 F4D4CF
+
 const AboutMe = () => {
   return (
     <div>
@@ -13,29 +13,46 @@ const AboutMe = () => {
       <div className="boxAboutMe">
         <img
           className="imgAboutMe"
-          src="https://firebasestorage.googleapis.com/v0/b/ivana-papurello.firebasestorage.app/o/placeholder.jpg?alt=media&token=7097dce0-42fb-4ceb-93f1-1f11ca1fb7ee"
+          src="https://firebasestorage.googleapis.com/v0/b/ivana-papurello.firebasestorage.app/o/ivana-papurello-self.png?alt=media&token=66b0b3b1-cddd-4523-abe3-f1bf1fa9e3bc"
           alt=""
         />
+
         <div className="boxTextAboutMe">
           <h2 className="titleMyPath">Mi camino</h2>
           <p className="textAboutMe">
-            Soy una apasionada terapeuta y facilitadora con más de 10 años de
-            experiencia en el campo de la sanación energética y la
-            bideocodificación. Mi camino comenzó tras una profunda crisis
-            personal que me llevó a buscar respuestas más allá de lo
-            convencional.
+            Soy Ivana Papurello, mentora holística, chamana, mujer medicina y
+            sanadora. Llevo más de 25 años recorriendo el camino de la sanación
+            espiritual, el despertar de la conciencia y el retorno al corazón.
+            Me formé como Licenciada en Biodesprogramación Biológica y
+            Reprogramación Ancestral, y he dedicado mi vida a integrar la
+            sabiduría ancestral con herramientas terapéuticas profundas y
+            transformadoras.
           </p>
           <p className="textAboutMe">
-            Tras años de formación con maestros de diversas disciplinas en
-            España, India y Estados Unidos, desarrollé un enfoque único que
-            integra la bideocodificación, la sanación energética, la liberación
-            emocional y otras técnicas complementarias.
+            Acompaño a seres , buscadores espirituales que sienten el llamado a
+            sanar, recordar quiénes son y reconectar con su poder interior. A
+            través de mis cursos holísticos, comparto todo lo que he aprendido y
+            vivido en este camino: técnicas de sanación energética, rituales
+            chamánicos, reprogramación del linaje, conexión con la medicina de
+            la Tierra y prácticas sagradas que despiertan el alma.
           </p>
           <p className="textAboutMe">
-            Mi misión es ayudar a las personas a reconectar con su esencia y
-            liberar los patrones limitantes que les impiden vivir plenamente.
-            Creo firmemente que todos tenemos el poder de sanar y transformar
-            nuestra vida desde dentro.
+            Cada formación es un espacio seguro y amoroso donde podés aprender a
+            tu ritmo, en comunidad o de forma individual, y aplicar estos
+            saberes tanto en tu vida personal como en tu camino como terapeuta o
+            guía espiritual. No solo comparto conocimientos, sino también una
+            experiencia profunda de transformación desde el cuerpo, el alma y el
+            linaje.
+          </p>
+          <p className="textAboutMe">
+            Este es un llamado a todas aquellas personas que desean sanar,
+            crecer y expandirse desde lo más auténtico de su ser. Mis cursos son
+            puertas hacia una nueva vida, una vida en coherencia, con propósito
+            y en sintonía con tu verdadera esencia.
+          </p>
+          <p className="textAboutMe">
+            Si sentís que es tu momento, te invito a comenzar hoy tu viaje de
+            transformación.
           </p>
         </div>
       </div>

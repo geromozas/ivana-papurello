@@ -1,3 +1,6 @@
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import EmailIcon from "@mui/icons-material/Email";
+import { IconButton } from "@mui/material";
 import "./Footer.css";
 
 const Footer = () => {
@@ -37,8 +40,25 @@ const Footer = () => {
         </div>
         <div style={{ color: "white" }} className="subBoxFooter">
           <h4 style={{ color: "#d1a4ac" }}>Contacto</h4>
-          <p>ivana_paurello@gmail.com</p>
-          <p>+34 123 456 789</p>
+          <div>
+            <a href="mailto:mozasgeronimo@gmail.com" style={{ color: "white" }}>
+              <IconButton>
+                <EmailIcon />
+              </IconButton>
+              papurelloiva@gmail.com
+            </a>
+          </div>
+          <div>
+            <a
+              href="https://wa.me/5493413485580?text=Hola%2C%20te%20contacto%20desde%20tu%20web..."
+              style={{ color: "white" }}
+            >
+              <IconButton>
+                <WhatsAppIcon />
+              </IconButton>
+              +54 9 341 348-5580
+            </a>
+          </div>
         </div>
       </div>
       <hr style={{ marginTop: 20, marginBottom: 20 }} />

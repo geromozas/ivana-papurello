@@ -23,6 +23,10 @@
   justify-content: center;
 }
 
+.subBoxFooter {
+  flex-direction: column;
+}
+
 @media (max-width: 750px) {
   .boxFooterUno {
     flex-direction: column;

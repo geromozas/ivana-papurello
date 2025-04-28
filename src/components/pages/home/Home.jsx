@@ -24,8 +24,6 @@ const Home = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  // console.log(products);
-
   return (
     <div id="boxHome">
       <div className="homeStart">
@@ -55,8 +53,8 @@ const Home = () => {
           </div>
         </div>
         <img
-          src="https://firebasestorage.googleapis.com/v0/b/ivana-papurello.firebasestorage.app/o/placeholder.jpg?alt=media&token=7097dce0-42fb-4ceb-93f1-1f11ca1fb7ee"
-          alt=""
+          src="https://firebasestorage.googleapis.com/v0/b/ivana-papurello.firebasestorage.app/o/ivana-picture.jpg?alt=media&token=c631145a-b678-4c63-97b8-fff0a0bdad2b"
+          alt="imagen presentación"
           className="imgHome"
         />
       </div>
@@ -89,7 +87,7 @@ const Home = () => {
                 key={product.id}
                 image={product.image}
                 title={product.title}
-                description={product.description}
+                description={product.description_small}
                 unit_price={product.unit_price}
                 id={product.id}
               />

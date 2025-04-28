@@ -62,7 +62,7 @@ const ProductsList = ({ products }) => {
                 <TableCell component="th" scope="row" align="left">
                   <IconButton>
                     <EditIcon />
-                  </IconButton>{" "}
+                  </IconButton>
                   <IconButton>
                     <DeleteIcon />
                   </IconButton>

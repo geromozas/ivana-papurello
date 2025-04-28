@@ -18,7 +18,15 @@ const ProductCardDetail = ({
           <img className="imgCardDetail" src={image} alt="" />
           <div>
             <h2>Descripción</h2>
-            <p className="textDetailDescription">{description}</p>
+            {/* <p className="textDetailDescription">{description}</p> */}
+            <p className="textDetailDescription">
+              {description.split("\n").map((linea, index) => (
+                <span key={index}>
+                  {linea}
+                  <br />
+                </span>
+              ))}
+            </p>
             <h3 className="cardDetailPrice">${unit_price}</h3>
             <div className="boxButtonsDetail">
               <Button

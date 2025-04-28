@@ -3,6 +3,13 @@ import { AuthContext } from "../../../context/AuthContext";
 import { db } from "../../../firebaseConfig";
 import { getDocs, collection, query, where } from "firebase/firestore";
 import "./UserOrders.css";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
 const UserOrders = () => {
   const [myOrders, setMyOrders] = useState([]);
@@ -25,27 +32,95 @@ const UserOrders = () => {
   }, [user.email]);
 
   return (
-    <div style={{ marginTop: 40 }}>
-      <div className="boxTitleMyOrders">
-        <h1>Mis compras</h1>
-      </div>
-      {myOrders.map((order) => {
-        return (
-          <div key={order.id} style={{ border: "2px solid black" }}>
-            {order?.items?.map((product) => {
-              return (
-                <div key={product.id}>
-                  <h2>{product.title}</h2>
-                  <img src={product.image} alt="imagen producto" />
-                </div>
-              );
-            })}
-            <h4>El total de la orden es {order.total}</h4>
+    <div>
+      {myOrders.length === 0 ? (
+        <div>
+          <h1 style={{ marginTop: 50, marginBottom: 50, textAlign: "center" }}>
+            Uups parece que todavia no tienes ninguna compra realizada
+          </h1>
+        </div>
+      ) : (
+        <div style={{ marginTop: 40 }}>
+          <div className="boxTitleMyOrders">
+            <h1>Mis compras</h1>
           </div>
-        );
-      })}
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="tabla de compras">
+              <TableHead>
+                <TableRow>
+                  {/* <TableCell align="left">ID de Orden</TableCell> */}
+                  <TableCell align="left">Producto</TableCell>
+                  <TableCell align="left">Imagen</TableCell>
+                  <TableCell align="left">Precio</TableCell>
+                  <TableCell align="left">Total de Orden</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {myOrders.map((order) =>
+                  order.items.map((product) => (
+                    <TableRow key={`${order.id}-${product.id}`}>
+                      {/* <TableCell align="left">{order.id}</TableCell> */}
+                      <TableCell align="left">{product.title}</TableCell>
+                      <TableCell align="left">
+                        <img
+                          src={product.image}
+                          alt="imagen producto"
+                          style={{ width: 80, height: 80, borderRadius: 8 }}
+                        />
+                      </TableCell>
+                      <TableCell align="left">${product.unit_price}</TableCell>
+                      <TableCell align="left">${order.total}</TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          {/* {myOrders.map((order) => {
+            return (
+              <div key={order.id}>
+                {order?.items?.map((product) => {
+                  return (
+                    <div key={product.id}>
+                      <h2>{product.title}</h2>
+                      <img
+                        src={product.image}
+                        alt="imagen producto"
+                        style={{ width: 100 }}
+                      />
+                    </div>
+                  );
+                })}
+                <h4>El total de la orden es {order.total}</h4>
+              </div>
+            );
+          })} */}
+        </div>
+      )}
     </div>
   );
 };
 
 export default UserOrders;
+{
+  /* <div style={{ marginTop: 40 }}>
+<div className="boxTitleMyOrders">
+  <h1>Mis compras</h1>
+</div>
+{myOrders.map((order) => {
+  return (
+    <div key={order.id} style={{ border: "2px solid black" }}>
+      {order?.items?.map((product) => {
+        return (
+          <div key={product.id}>
+            <h2>{product.title}</h2>
+            <img src={product.image} alt="imagen producto" />
+          </div>
+        );
+      })}
+      <h4>El total de la orden es {order.total}</h4>
+    </div>
+  );
+})}
+</div> */
+}

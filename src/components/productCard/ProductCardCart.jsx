@@ -12,7 +12,7 @@ const ProductCardCart = ({ title, unit_price, image, id }) => {
       <div className="subBoxProductCard">
         <img className="imgCart" src={image} alt="" />
         <div className="boxImgTitlePrice">
-          <h4 style={{ marginBottom: 20 }}>{title}</h4>
+          <h4 className="titleProductCart">{title}</h4>
           <p>${unit_price}</p>
         </div>
         <div>

@@ -3,10 +3,13 @@
   flex-direction: column;
   align-items: center;
   margin-top: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   background-color: #f4d4cf;
   padding: 20px;
   border-radius: 10px;
+}
+.boxTextAboutMeSmallScreen {
+  display: none;
 }
 
 .boxAboutMe {
@@ -21,16 +24,19 @@
 
 .imgAboutMe {
   width: 500px;
+  height: 500px;
+  margin-top: 30px;
   margin-right: 60px;
   border-radius: 10px;
 }
 
 .titleMyPath {
   margin-bottom: 20px;
+  font-size: 30px;
 }
 
 .textAboutMe {
-  width: 500px;
+  width: 600px;
   margin-bottom: 15px;
 }
 
@@ -49,10 +55,16 @@
   .textAboutMe {
     width: 400px;
   }
+}
+
+@media (max-width: 1350px) {
+  .boxTextAboutMe {
+    margin-left: 0;
+  }
   .imgAboutMe {
     width: 400px;
     height: 400px;
-    margin-top: 30px;
+    margin-top: 50px;
   }
 }
 
@@ -85,6 +97,9 @@
 }
 
 @media (max-width: 630px) {
+  .boxTitleAboutMe {
+    margin-bottom: 0;
+  }
   .imgAboutMe {
     width: 400px;
   }

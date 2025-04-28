@@ -12,7 +12,8 @@
 }
 
 .titleHome {
-  width: 600px;
+  width: 700px;
+  font-size: 50px;
 }
 
 .textInitialHome {
@@ -24,8 +25,8 @@
 }
 
 .imgHome {
-  width: 600px;
-  height: 400px;
+  width: 800px;
+  height: 600px;
   border-radius: 10px;
 }
 
