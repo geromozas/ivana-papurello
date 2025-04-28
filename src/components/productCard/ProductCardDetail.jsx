@@ -41,7 +41,7 @@ const ProductCardDetail = ({
               </Button>
             </div>
             <p style={{ marginTop: 20 }}>
-              ¿Tenes dudas?
+              ¿Tenes dudas?{" "}
               <a
                 href={`https://wa.me/5493416041873?text=Hola%2C%20estoy%20interesado/a%20en%20este%20producto, ${title}...`}
                 style={{ color: "#F4D4CF", fontWeight: "bold" }}

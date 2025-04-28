@@ -43,13 +43,14 @@ export default function ProductCard({
           gutterBottom
           variant="h5"
           component="div"
-          sx={{ height: 70 }}
+          sx={{ height: 50 }}
         >
           {title}
         </Typography>
         <Typography
           variant="body2"
-          sx={{ color: "text.secondary", height: 125 }}
+          sx={{ color: "text.secondary", height: 150 }}
+          style={{ display: "flex", alignItems: "center" }}
         >
           {description}
         </Typography>
