@@ -70,7 +70,7 @@ const AboutMe = () => {
             marginTop: 15,
           }}
         >
-          <a href="https://wa.me/5493416041873?text=Hola%2C%20estoy%20interesado/a%20en%20tus%20servicios...">
+          <a href="https://wa.me/5493413485580?text=Hola%2C%20te%20contacto%20desde%20tu%20web...">
             <Button>Contactar</Button>
           </a>
           <a href="/shop">

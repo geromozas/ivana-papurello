@@ -49,8 +49,8 @@ export default function ProductCard({
         </Typography>
         <Typography
           variant="body2"
-          sx={{ color: "text.secondary", height: 150 }}
-          style={{ display: "flex", alignItems: "center" }}
+          sx={{ color: "text.secondary", height: 110 }}
+          style={{ display: "flex", alignItems: "start", marginTop: 30 }}
         >
           {description}
         </Typography>
