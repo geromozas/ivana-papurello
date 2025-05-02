@@ -6,8 +6,10 @@ import ProductsList from "./ProductsList";
 
 const Dashboard = () => {
   const [products, setProducts] = useState([]);
+  const [isChange, setIsChange] = useState(false);
 
   useEffect(() => {
+    setIsChange(false);
     let productsCollections = collection(db, "products");
     getDocs(productsCollections).then((res) => {
       const newArr = res.docs.map((product) => {
@@ -18,13 +20,12 @@ const Dashboard = () => {
       });
       setProducts(newArr);
     });
-  }, []);
-  console.log(products);
+  }, [isChange]);
 
   return (
     <div style={{ marginTop: 50 }}>
       <h1 style={{ justifySelf: "center" }}>Panel de control</h1>
-      <ProductsList products={products} />
+      <ProductsList products={products} setIsChange={setIsChange} />
     </div>
   );
 };

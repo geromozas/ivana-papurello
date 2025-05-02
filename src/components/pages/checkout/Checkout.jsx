@@ -59,9 +59,6 @@ const Checkout = () => {
     try {
       let res = await axios.post(
         "https://backend-ivana-papurello.vercel.app/create_preference",
-        // backend-ivana-papurello.vercel.app
-
-        // "http://localhost:8080/create_preference",
         {
           items: newArray,
         }
@@ -93,6 +90,7 @@ const Checkout = () => {
     }
   };
 
+  //formik hacer
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };

@@ -8,15 +8,56 @@ import Paper from "@mui/material/Paper";
 import { Button, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import { db } from "../../../firebaseConfig";
+import { deleteDoc, doc } from "firebase/firestore";
+import Box from "@mui/material/Box";
+// import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import { useState } from "react";
+import ProductForm from "./ProductForm";
 
-const ProductsList = ({ products }) => {
-  const editProduct = (id) => {};
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 800,
+  height: 850,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  borderRadius: 5,
+  boxShadow: 24,
+  p: 4,
+};
 
-  const deleteProduct = (id) => {};
+const ProductsList = ({ products, setIsChange }) => {
+  const [open, setOpen] = useState(false);
+  const [productSelected, setProductSelected] = useState(null);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const deleteProduct = (id) => {
+    deleteDoc(doc(db, "products", id));
+    console.log("el pruducto con el id " + id + " se ha borrado");
+    alert("Producto borrado");
+
+    setIsChange(true);
+  };
+
+  const handleOpen = (product) => {
+    setProductSelected(product);
+    setOpen(true);
+  };
 
   return (
     <div style={{ marginTop: 30 }}>
-      <Button variant="contained" style={{ marginBottom: 20 }}>
+      <Button
+        variant="contained"
+        style={{ marginBottom: 20 }}
+        onClick={() => handleOpen(null)}
+      >
         Agregar Producto
       </Button>
       <TableContainer component={Paper}>
@@ -87,10 +128,10 @@ const ProductsList = ({ products }) => {
                   />
                 </TableCell>
                 <TableCell component="th" scope="row" align="left">
-                  <IconButton>
+                  <IconButton onClick={() => handleOpen(product)}>
                     <EditIcon />
                   </IconButton>
-                  <IconButton>
+                  <IconButton onClick={() => deleteProduct(product.id)}>
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>
@@ -99,6 +140,21 @@ const ProductsList = ({ products }) => {
           </TableBody>
         </Table>
       </TableContainer>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <ProductForm
+            handleClose={handleClose}
+            setIsChange={setIsChange}
+            productSelected={productSelected}
+            setProductSelected={setProductSelected}
+          />
+        </Box>
+      </Modal>
     </div>
   );
 };

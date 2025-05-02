@@ -12,6 +12,8 @@ import {
 
 import { getFirestore } from "firebase/firestore";
 
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
   authDomain: import.meta.env.VITE_AUTH_DOMAIN,
@@ -28,6 +30,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 //base de datos
 export const db = getFirestore(app);
+//storage
+const storage = getStorage(app);
 
 //login
 export const onSignIn = async ({ email, password }) => {
@@ -80,3 +84,9 @@ export const forgotPassword = async ({ email }) => {
 };
 
 //storage
+export const uploadFile = async (file) => {
+  const storageRef = ref(storage, file.name);
+  await uploadBytes(storageRef, file);
+  let url = await getDownloadURL(storageRef);
+  return url;
+};
