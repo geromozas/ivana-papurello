@@ -9,7 +9,11 @@ const ProductForm = ({
   productSelected,
   setProductSelected,
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
+  const [isImageUploaded, setIsImageUploaded] = useState(false);
+  const [isPdfUploaded, setIsPdfUploaded] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+
   const [newProduct, setNewProduct] = useState({
     title: "",
     description: "",
@@ -22,7 +26,8 @@ const ProductForm = ({
   const [pdfFile, setPdfFile] = useState(null);
 
   const handleImage = async () => {
-    setIsLoading(true);
+    // setIsLoading(true);
+    setIsUploading(true);
     let url = await uploadFile(file);
 
     if (productSelected) {
@@ -33,8 +38,31 @@ const ProductForm = ({
     } else {
       setNewProduct({ ...newProduct, image: url });
     }
+    setIsImageUploaded(true);
+    setIsUploading(false);
+    // setIsLoading(false);
+  };
 
-    setIsLoading(false);
+  const handlePdf = async () => {
+    setIsUploading(true);
+    try {
+      let url = await uploadFile(pdfFile);
+
+      if (productSelected) {
+        setProductSelected({
+          ...productSelected,
+          pdf: url,
+        });
+      } else {
+        setNewProduct((prev) => ({ ...prev, pdf: url }));
+      }
+
+      setIsPdfUploaded(true);
+    } catch (error) {
+      console.log("Error al subir el PDF:", error);
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   //formik hacer
@@ -52,15 +80,23 @@ const ProductForm = ({
   //formik hacer
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (isUploading)
+      return alert("Por favor, espere a que se suban los archivos.");
+
     const productsCollection = collection(db, "products");
 
     //
     let pdfUrl = productSelected?.pdf || "";
     if (pdfFile) {
       try {
+        setIsUploading(true);
         pdfUrl = await uploadFile(pdfFile);
+        setIsPdfUploaded(true);
       } catch (error) {
         console.log("Error al subir el PDF: ", error);
+      } finally {
+        setIsUploading(false);
       }
     }
 
@@ -138,7 +174,10 @@ const ProductForm = ({
             Cargar imagen
           </Button>
         )}
-        {productSelected?.pdf && (
+        {isImageUploaded && (
+          <p style={{ color: "green" }}>✅ Imagen subida correctamente</p>
+        )}
+        {productSelected?.image && (
           <a
             href={productSelected.image}
             target="_blank"
@@ -155,8 +194,19 @@ const ProductForm = ({
         <TextField
           type="file"
           accept="application/pdf"
-          onChange={(e) => setPdfFile(e.target.files[0])}
+          onChange={(e) => {
+            setPdfFile(e.target.files[0]);
+            setIsPdfUploaded(false);
+          }}
         />
+        {pdfFile && (
+          <Button onClick={handlePdf} type="button">
+            Cargar PDF
+          </Button>
+        )}
+        {isPdfUploaded && (
+          <p style={{ color: "green" }}>✅ PDF subido correctamente</p>
+        )}
         {productSelected?.pdf && (
           <a
             href={productSelected.pdf}
@@ -177,11 +227,10 @@ const ProductForm = ({
             marginTop: 20,
           }}
         >
-          {/* {file && !isLoading && ( */}
-          <Button variant="contained" type="submit">
+          <Button variant="contained" type="submit" disabled={isUploading}>
             {productSelected ? "Modificar" : "Crear"}
           </Button>
-          {/* )} */}
+
           <Button variant="contained" onClick={() => handleClose()}>
             Cancelar
           </Button>

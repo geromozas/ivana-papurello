@@ -40,6 +40,18 @@ const Checkout = () => {
         }
       );
 
+      axios.post("https://backend-ivana-papurello.vercel.app/send_course", {
+        email: order.email,
+        name: order.name,
+        courseTitle: order.items.map((item) => item.title).join(", "),
+        pdfUrl: order.items[0].pdfUrl,
+      });
+      // axios.post("https://backend-ivana-papurello.vercel.app/send_course", {
+      //   email: order.email,
+      //   name: order.name,
+      //   courseTitle: order.items.map((item) => item.title).join(", "),
+      // });
+
       localStorage.removeItem("order");
       clearCart().catch((error) => console.log(error));
     }
