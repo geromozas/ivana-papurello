@@ -35,7 +35,6 @@ const CartContextComponent = ({ children }) => {
     const total = cart.reduce((acc, elemento) => {
       return acc + elemento.unit_price;
     }, 0);
-    console.log(total);
     return total;
   };
 
