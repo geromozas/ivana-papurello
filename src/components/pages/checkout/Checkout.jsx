@@ -32,7 +32,7 @@ const Checkout = () => {
 
   useEffect(() => {
     let order = JSON.parse(localStorage.getItem("order"));
-    if (paramValue === import.meta.env.VITE_PARAM_BUY_VALUE) {
+    if (paramValue === "approved") {
       let ordersCollections = collection(db, "orders");
       addDoc(ordersCollections, { ...order, date: serverTimestamp() }).then(
         (res) => {
@@ -40,12 +40,12 @@ const Checkout = () => {
         }
       );
 
-      // 🔹 Enviar el correo con el curso
-      axios.post("https://backend-ivana-papurello.vercel.app/send_course", {
-        email: order.email,
-        name: order.name,
-        courseTitle: order.items.map((item) => item.title).join(", "),
-      });
+      // Enviar el correo con el curso
+      // axios.post("https://backend-ivana-papurello.vercel.app/send_course", {
+      //   email: order.email,
+      //   name: order.name,
+      //   courseTitle: order.items.map((item) => item.title).join(", "),
+      // });
 
       localStorage.removeItem("order");
       clearCart().catch((error) => console.log(error));
