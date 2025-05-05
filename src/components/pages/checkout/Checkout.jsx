@@ -32,7 +32,7 @@ const Checkout = () => {
 
   useEffect(() => {
     let order = JSON.parse(localStorage.getItem("order"));
-    if (paramValue === "approved") {
+    if (paramValue === import.meta.env.VITE_PARAM_BUY_VALUE) {
       let ordersCollections = collection(db, "orders");
       addDoc(ordersCollections, { ...order, date: serverTimestamp() }).then(
         (res) => {

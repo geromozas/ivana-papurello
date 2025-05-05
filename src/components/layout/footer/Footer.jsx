@@ -1,5 +1,6 @@
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import EmailIcon from "@mui/icons-material/Email";
+import InstagramIcon from "@mui/icons-material/Instagram";
 import { IconButton } from "@mui/material";
 import "./Footer.css";
 
@@ -57,6 +58,17 @@ const Footer = () => {
                 <WhatsAppIcon />
               </IconButton>
               +54 9 341 348-5580
+            </a>
+          </div>
+          <div>
+            <a
+              href="https://www.instagram.com/ivapapurello/"
+              style={{ color: "white" }}
+            >
+              <IconButton>
+                <InstagramIcon />
+              </IconButton>
+              ivapapurello
             </a>
           </div>
         </div>

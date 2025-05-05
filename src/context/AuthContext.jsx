@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createContext } from "react";
 
 export const AuthContext = createContext();
@@ -10,6 +10,20 @@ const AuthContextComponent = ({ children }) => {
   const [isLogged, setIsLogged] = useState(
     JSON.parse(localStorage.getItem("isLogged")) || false
   );
+
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    // Simular recuperación de datos del localStorage
+    const storedUser = JSON.parse(localStorage.getItem("userInfo"));
+    const storedLogged = JSON.parse(localStorage.getItem("isLogged"));
+
+    if (storedUser && storedLogged) {
+      setUser(storedUser);
+      setIsLogged(true);
+    }
+
+    setLoading(false); // Ya terminó de cargar
+  }, []);
 
   const handleLogin = (userLogged) => {
     setUser(userLogged);
@@ -28,6 +42,7 @@ const AuthContextComponent = ({ children }) => {
   let data = {
     user,
     isLogged,
+    loading,
     handleLogin,
     logoutContext,
   };

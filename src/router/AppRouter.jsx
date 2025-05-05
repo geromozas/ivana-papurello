@@ -40,3 +40,33 @@ const AppRouter = () => {
 };
 
 export default AppRouter;
+// const AppRouter = () => {
+//   return (
+//     <Routes>
+//       <Route element={<ProtectedUsers />}>
+//         <Route element={<Layout />}>
+//           {routes.map(({ id, path, Element }) => (
+//             <Route key={id} path={path} element={<Element />} />
+//           ))}
+//         </Route>
+//       </Route>
+
+//       <Route element={<ProtectedAdmin />}>
+//         <Route element={<Layout />}>
+//           <Route path="/dashboard" element={<Dashboard />} />
+//         </Route>
+//       </Route>
+
+//       {/* Login */}
+//       <Route path="/login" element={<Login />} />
+
+//       {/* register  */}
+//       <Route path="/register" element={<Register />} />
+
+//       {/* forgot password  */}
+//       <Route path="/forgot-password" element={<ForgotPassword />} />
+
+//       <Route path="*" element={<h1>Not found</h1>} />
+//     </Routes>
+//   );
+// };
