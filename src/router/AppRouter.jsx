@@ -7,15 +7,20 @@ import Layout from "../components/layout/Layout.jsx";
 import Dashboard from "../components/pages/dashboard/Dashboard.jsx";
 import ProtectedAdmin from "./ProtectedAdmin.jsx";
 import ProtectedUsers from "./ProtectedUsers.jsx";
+import Checkout from "../components/pages/checkout/Checkout.jsx";
 
 const AppRouter = () => {
   return (
     <Routes>
+      <Route element={<Layout />}>
+        {routes.map(({ id, path, Element }) => (
+          <Route key={id} path={path} element={<Element />} />
+        ))}
+      </Route>
+
       <Route element={<ProtectedUsers />}>
         <Route element={<Layout />}>
-          {routes.map(({ id, path, Element }) => (
-            <Route key={id} path={path} element={<Element />} />
-          ))}
+          <Route path="/checkout" element={<Checkout />} />
         </Route>
       </Route>
 

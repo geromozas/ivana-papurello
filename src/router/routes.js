@@ -32,11 +32,11 @@ export const routes = [
     path: "/cart",
     Element: Cart,
   },
-  {
-    id: "checkout",
-    path: "/checkout",
-    Element: Checkout,
-  },
+  // {
+  //   id: "checkout",
+  //   path: "/checkout",
+  //   Element: Checkout,
+  // },
   {
     id: "userOrders",
     path: "/user-orders",
