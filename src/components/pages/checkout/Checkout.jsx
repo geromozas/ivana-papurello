@@ -26,31 +26,60 @@ const Checkout = () => {
 
   const [orderId, setOrderId] = useState(null);
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
+  const [emailError, setEmailError] = useState(null);
+
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const paramValue = queryParams.get("status");
 
   useEffect(() => {
     let order = JSON.parse(localStorage.getItem("order"));
-    if (paramValue === "approved") {
-      let ordersCollections = collection(db, "orders");
-      addDoc(ordersCollections, { ...order, date: serverTimestamp() }).then(
-        (res) => {
-          setOrderId(res.id);
-        }
-      );
+    if (paramValue === "approved" && order) {
+      setIsLoading(true);
 
-      // Enviar el correo con el curso
-      // axios.post("https://backend-ivana-papurello.vercel.app/send_course", {
-      //   email: order.email,
-      //   name: order.name,
-      //   courseTitle: order.items.map((item) => item.title).join(", "),
-      // });
+      let ordersCollections = collection(db, "orders");
+      addDoc(ordersCollections, { ...order, date: serverTimestamp() })
+        .then((res) => {
+          setOrderId(res.id);
+          sendCourseEmail(order);
+        })
+        .catch((error) => {
+          console.log("Error al guardar la orden: ", error);
+          setIsLoading(false);
+        });
 
       localStorage.removeItem("order");
       clearCart().catch((error) => console.log(error));
     }
   }, [paramValue]);
+
+  const sendCourseEmail = async (order) => {
+    try {
+      // Enviamos los correos para cada producto con su PDF asociado
+      const coursePromises = order.phone.map((product) => {
+        return axios.post(
+          "https://backend-ivana-papurello.vercel.app/send-course-email",
+          {
+            email: order.email || user.email,
+            courseName: product.title,
+            pdfUrl: product.pdf, // Usamos el campo pdf que contiene la URL de Firebase Storage
+          }
+        );
+      });
+
+      await Promise.all(coursePromises);
+      setEmailSent(true);
+    } catch (error) {
+      console.error("Error al enviar el correo:", error);
+      setEmailError(
+        "No se pudo enviar el correo con el curso. Por favor contacta a soporte."
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   let total = getTotalPrice();
 
@@ -134,7 +163,6 @@ const Checkout = () => {
           <h4>Su orden de compra es {orderId}</h4>
         </>
       )}
-      {/* <h1> */}
 
       {preferenceId && (
         <Wallet
@@ -144,12 +172,12 @@ const Checkout = () => {
           }}
         />
       )}
-      {/* </h1> */}
     </div>
   );
 };
 
 export default Checkout;
+
 // import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 // import { useContext, useEffect, useState } from "react";
 // import { CartContext } from "../../../context/CartContext";
@@ -184,20 +212,13 @@ export default Checkout;
 
 //   useEffect(() => {
 //     let order = JSON.parse(localStorage.getItem("order"));
-//     if (paramValue === import.meta.env.VITE_PARAM_BUY_VALUE) {
+//     if (paramValue === "approved") {
 //       let ordersCollections = collection(db, "orders");
 //       addDoc(ordersCollections, { ...order, date: serverTimestamp() }).then(
 //         (res) => {
 //           setOrderId(res.id);
 //         }
 //       );
-//       // "https://backend-ivana-papurello.vercel.app/send_course"
-//       axios.post("http://localhost:8080/send_course", {
-//         email: order.email,
-//         name: order.name,
-//         courseTitle: order.items.map((item) => item.title).join(", "),
-//         pdfUrl: order.items[0].pdfUrl,
-//       });
 
 //       localStorage.removeItem("order");
 //       clearCart().catch((error) => console.log(error));
@@ -234,13 +255,11 @@ export default Checkout;
 //     let order = {
 //       name: userData.name,
 //       lastName: userData.lastName,
-//       phone: userData.phone,
-//       items: cart,
+//       phone: cart,
 //       total: total,
 //       email: user.email,
 //     };
 //     localStorage.setItem("order", JSON.stringify(order));
-
 //     const id = await createPreference();
 //     if (id) {
 //       setPreferenceId(id);
@@ -249,7 +268,6 @@ export default Checkout;
 //     }
 //   };
 
-//   //formik hacer
 //   const handleChange = (e) => {
 //     setUserData({ ...userData, [e.target.name]: e.target.value });
 //   };
@@ -285,23 +303,16 @@ export default Checkout;
 //         </>
 //       ) : (
 //         <>
-//           <div
-//             style={{
-//               display: "flex",
-//               justifyContent: "center",
-//               alignItems: "center",
-//             }}
-//           >
-//             <h4>El pago se realizo con exito</h4>
-//             <h4>Su orden de compra es {orderId}</h4>
-//           </div>
+//           <h4>El pago se realizo con exito</h4>
+//           <h4>Su orden de compra es {orderId}</h4>
 //         </>
 //       )}
+
 //       {preferenceId && (
 //         <Wallet
 //           initialization={{
 //             preferenceId: preferenceId,
-//             redirectMode: "self",
+//             // redirectMode: "self",
 //           }}
 //         />
 //       )}
