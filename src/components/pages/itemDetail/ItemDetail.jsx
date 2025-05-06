@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getDoc, collection, doc } from "firebase/firestore";
 import { db } from "../../../firebaseConfig.js";
 import ProductCardDetail from "../../productCard/ProductCardDetail.jsx";
@@ -10,6 +10,7 @@ const ItemDetail = () => {
   const [product, setProduct] = useState(null);
 
   const { addToCartContext } = useContext(CartContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let refCollection = collection(db, "products");
@@ -33,6 +34,11 @@ const ItemDetail = () => {
     }
   };
 
+  const buyCourse = () => {
+    addToCart();
+    navigate("/checkout");
+  };
+
   return (
     <div style={{ marginTop: 40 }}>
       {product && (
@@ -43,6 +49,7 @@ const ItemDetail = () => {
             unit_price={product.unit_price}
             image={product.image}
             addToCart={addToCart}
+            buyCourse={buyCourse}
           />
         </div>
       )}

@@ -6,7 +6,6 @@ import "./ProductCardCart.css";
 const ProductCardCart = ({ title, unit_price, image, id }) => {
   const { deleteById } = useContext(CartContext);
   return (
-    // <div className="boxProductCard">
     <div className="boxProductCard">
       <hr style={{ marginBottom: 10, marginTop: 10 }} />
       <div className="subBoxProductCard">
@@ -27,7 +26,6 @@ const ProductCardCart = ({ title, unit_price, image, id }) => {
         </div>
       </div>
     </div>
-    // </div>
   );
 };
 

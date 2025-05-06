@@ -7,6 +7,7 @@ const ProductCardDetail = ({
   unit_price,
   image,
   addToCart,
+  buyCourse,
 }) => {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
@@ -18,7 +19,7 @@ const ProductCardDetail = ({
           <img className="imgCardDetail" src={image} alt="" />
           <div>
             <h2>Descripción</h2>
-            {/* <p className="textDetailDescription">{description}</p> */}
+
             <p className="textDetailDescription">
               {description.split("\n").map((linea, index) => (
                 <span key={index}>
@@ -33,6 +34,7 @@ const ProductCardDetail = ({
                 size={isLargeScreen ? "large" : "small"}
                 style={{ marginRight: 20, marginBottom: 0 }}
                 variant="contained"
+                onClick={buyCourse}
               >
                 Comprar
               </Button>
