@@ -7,6 +7,8 @@ import { AuthContext } from "../../../context/AuthContext";
 import { useLocation } from "react-router-dom";
 import { db } from "../../../firebaseConfig";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const Checkout = () => {
   const { cart, getTotalPrice, clearCart } = useContext(CartContext);
@@ -43,7 +45,7 @@ const Checkout = () => {
       addDoc(ordersCollections, { ...order, date: serverTimestamp() })
         .then((res) => {
           setOrderId(res.id);
-          sendCourseEmail(order);
+          return sendCourseEmail(order);
         })
         .catch((error) => {
           console.log("Error al guardar la orden: ", error);
@@ -51,17 +53,28 @@ const Checkout = () => {
         });
 
       localStorage.removeItem("order");
-      clearCart().catch((error) => console.log(error));
+      try {
+        clearCart();
+      } catch (error) {
+        console.log("Error al limpiar el carrito", error);
+      }
     }
   }, [paramValue]);
 
   const sendCourseEmail = async (order) => {
     console.log("Orden a enviar por correo:", order);
+    if (!order?.items || !Array.isArray(order.items)) {
+      console.error("La orden no contiene items válidos:", order);
+      setEmailError("No se pudo enviar el correo. Orden inválida.");
+      setIsLoading(false);
+      return;
+    }
+
     try {
       // Enviamos los correos para cada producto con su PDF asociado
       const coursePromises = order.items.map((product) => {
         return axios.post(
-          "https://backend-ivana-papurello.vercel.app/send-course-email",
+          "https://backend-ivana-papurello.vercel.app/api/email/send-course-email",
           {
             email: order.email || user.email,
             courseName: product.title,
@@ -89,6 +102,7 @@ const Checkout = () => {
       return {
         title: product.title,
         unit_price: product.unit_price,
+        pdfUrl: product.pdf,
         quantity: 1,
       };
     });
@@ -109,6 +123,10 @@ const Checkout = () => {
   };
 
   const handleBuy = async () => {
+    if (!cart.length) {
+      console.warn("El carrito está vacío. No se puede crear la orden.");
+      return;
+    }
     let order = {
       name: userData.name,
       lastName: userData.lastName,
@@ -170,7 +188,6 @@ const Checkout = () => {
         <Wallet
           initialization={{
             preferenceId: preferenceId,
-            // redirectMode: "self",
           }}
         />
       )}
@@ -179,3 +196,17 @@ const Checkout = () => {
 };
 
 export default Checkout;
+// const { handleSubmit, handleChange, errors } = useFormik({
+//   initialValues: {
+//     name: "",
+//     lastName: "",
+//     phone: "",
+//   },
+//   onSubmit: async (data) => {
+//     try {
+
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   },
+// });
