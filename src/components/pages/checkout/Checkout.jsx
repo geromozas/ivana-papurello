@@ -123,36 +123,47 @@ const Checkout = () => {
     }
   };
 
-  const handleBuy = async () => {
-    if (!cart.length) {
-      console.warn("El carrito está vacío. No se puede crear la orden.");
-      return;
-    }
-    let order = {
-      name: userData.name,
-      lastName: userData.lastName,
-      phone: userData.phone,
-      items: cart,
-      total: total,
-      email: user.email,
-    };
-    localStorage.setItem("order", JSON.stringify(order));
-    const id = await createPreference();
-    if (id) {
-      setPreferenceId(id);
-    } else {
-      console.log("Error al realizar la compra");
-    }
-  };
-
-  const handleChange = (e) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
-  };
+  const { handleSubmit, handleChange, values, errors } = useFormik({
+    initialValues: {
+      name: "",
+      lastName: "",
+      phone: "",
+    },
+    onSubmit: async () => {
+      if (!cart.length) {
+        console.warn("El carrito está vacío. No se puede crear la orden.");
+        return;
+      }
+      let order = {
+        name: userData.name,
+        lastName: userData.lastName,
+        phone: userData.phone,
+        items: cart,
+        total: total,
+        email: user.email,
+      };
+      localStorage.setItem("order", JSON.stringify(order));
+      const id = await createPreference();
+      if (id) {
+        setPreferenceId(id);
+      } else {
+        console.log("Error al realizar la compra");
+      }
+    },
+    validateOnChange: false,
+    validationSchema: Yup.object({
+      name: Yup.string().required("Campo requerido"),
+      lastName: Yup.string().required("Campo requerido"),
+      phone: Yup.string()
+        .matches(/^\d+$/, "Solo se permiten números")
+        .required("Campo obligatorio"),
+    }),
+  });
 
   return (
     <div style={{ marginTop: 40 }}>
       {!orderId ? (
-        <>
+        <form onSubmit={handleSubmit}>
           <div
             className="dataClient"
             style={{ display: "flex", flexDirection: "column", gap: 10 }}
@@ -161,23 +172,34 @@ const Checkout = () => {
               name="name"
               variant="outlined"
               label="Nombre"
+              value={values.name}
               onChange={handleChange}
+              error={Boolean(errors.name)}
+              helperText={errors.name}
             />
             <TextField
               name="lastName"
               variant="outlined"
               label="Apellido"
+              value={values.lastName}
               onChange={handleChange}
+              error={Boolean(errors.lastName)}
+              helperText={errors.lastName}
             />
             <TextField
               name="phone"
               variant="outlined"
               label="Telefono"
+              value={values.phone}
               onChange={handleChange}
+              error={Boolean(errors.phone)}
+              helperText={errors.phone}
             />
+            <Button type="submit" variant="contained">
+              Seleccione metodo de pago
+            </Button>
           </div>
-          <Button onClick={handleBuy}>Seleccione metodo de pago</Button>
-        </>
+        </form>
       ) : (
         <>
           <div className="successfulPurchase">
@@ -205,17 +227,28 @@ const Checkout = () => {
 };
 
 export default Checkout;
-// const { handleSubmit, handleChange, errors } = useFormik({
-//   initialValues: {
-//     name: "",
-//     lastName: "",
-//     phone: "",
-//   },
-//   onSubmit: async (data) => {
-//     try {
+// const handleBuy = async () => {
+// if (!cart.length) {
+//   console.warn("El carrito está vacío. No se puede crear la orden.");
+//   return;
+//   }
+// let order = {
+//   name: userData.name,
+//   lastName: userData.lastName,
+//   phone: userData.phone,
+//   items: cart,
+//   total: total,
+//   email: user.email,
+// };
+//   localStorage.setItem("order", JSON.stringify(order));
+//   const id = await createPreference();
+//   if (id) {
+//     setPreferenceId(id);
+//   } else {
+//     console.log("Error al realizar la compra");
+//   }
+// };
 
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   },
-// });
+// const handleChange = (e) => {
+//   setUserData({ ...userData, [e.target.name]: e.target.value });
+// };
