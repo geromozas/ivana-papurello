@@ -9,6 +9,7 @@ import { db } from "../../../firebaseConfig";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import ClipLoader from "react-spinners/ClipLoader";
 import "./Checkout.css";
 
 const Checkout = () => {
@@ -20,15 +21,7 @@ const Checkout = () => {
   });
 
   const [preferenceId, setPreferenceId] = useState(null);
-  const [userData, setUserData] = useState({
-    name: "",
-    lastName: "",
-    email: "",
-    phone: "",
-  });
-
   const [orderId, setOrderId] = useState(null);
-
   const [isLoading, setIsLoading] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
   const [emailError, setEmailError] = useState(null);
@@ -37,12 +30,14 @@ const Checkout = () => {
   const queryParams = new URLSearchParams(location.search);
   const paramValue = queryParams.get("status");
 
+  const total = getTotalPrice();
+
   useEffect(() => {
     let order = JSON.parse(localStorage.getItem("order"));
     if (paramValue === "approved" && order) {
       setIsLoading(true);
-
       let ordersCollections = collection(db, "orders");
+
       addDoc(ordersCollections, { ...order, date: serverTimestamp() })
         .then((res) => {
           setOrderId(res.id);
@@ -96,8 +91,6 @@ const Checkout = () => {
     }
   };
 
-  let total = getTotalPrice();
-
   const createPreference = async () => {
     const newArray = cart.map((product) => {
       return {
@@ -119,7 +112,7 @@ const Checkout = () => {
       const { id } = res.data;
       return id;
     } catch (error) {
-      console.log(error);
+      console.log("Error al crear preferencia:", error);
     }
   };
 
@@ -135,14 +128,16 @@ const Checkout = () => {
         return;
       }
       let order = {
-        name: userData.name,
-        lastName: userData.lastName,
-        phone: userData.phone,
+        name: values.name,
+        lastName: values.lastName,
+        phone: values.phone,
         items: cart,
         total: total,
         email: user.email,
       };
+
       localStorage.setItem("order", JSON.stringify(order));
+
       const id = await createPreference();
       if (id) {
         setPreferenceId(id);
@@ -159,6 +154,16 @@ const Checkout = () => {
         .required("Campo obligatorio"),
     }),
   });
+
+  if (isLoading) {
+    return (
+      <div style={{ marginTop: 40, textAlign: "center" }}>
+        <ClipLoader color="#1976d2" size={50} />
+        <h3>Procesando tu compra...</h3>
+        <p>Por favor, no cierres esta ventana.</p>
+      </div>
+    );
+  }
 
   return (
     <div style={{ marginTop: 40 }}>
