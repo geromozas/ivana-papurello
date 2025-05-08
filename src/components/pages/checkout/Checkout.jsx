@@ -9,6 +9,7 @@ import { db } from "../../../firebaseConfig";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import "./Checkout.css";
 
 const Checkout = () => {
   const { cart, getTotalPrice, clearCart } = useContext(CartContext);
@@ -179,8 +180,16 @@ const Checkout = () => {
         </>
       ) : (
         <>
-          <h4>El pago se realizo con exito</h4>
-          <h4>Su orden de compra es {orderId}</h4>
+          <div className="successfulPurchase">
+            <h2>El pago se realizo con exito</h2>
+            <h4>Su orden de compra es {orderId}</h4>
+            <p>
+              Gracias por su compra. Le hemos enviado el/los curso/s a su correo
+              electrónico. Por favor, revise también su carpeta de correo no
+              deseado o spam en caso de no encontrar el mensaje en su bandeja de
+              entrada.
+            </p>
+          </div>
         </>
       )}
 
