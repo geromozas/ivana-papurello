@@ -10,20 +10,22 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import LogoutIcon from "@mui/icons-material/Logout";
+import PersonIcon from "@mui/icons-material/Person";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import "./Navbar.css";
 import { useContext, useState } from "react";
-import LogoutIcon from "@mui/icons-material/Logout";
 import { menuItems } from "../../../router/navigation.js";
 import { logOut } from "../../../firebaseConfig.js";
 import { AuthContext } from "../../../context/AuthContext.jsx";
+import "./Navbar.css";
 
-import DashboardIcon from "@mui/icons-material/Dashboard";
 const drawerWidth = 200;
 
 function Navbar(props) {
-  const { logoutContext, user } = useContext(AuthContext);
+  const { logoutContext, user, isLogged } = useContext(AuthContext);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
@@ -61,6 +63,22 @@ function Navbar(props) {
         })}
 
         {user.rol === rolAdmin && (
+          <Link to={"/user-orders"}>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <ShoppingBagIcon sx={{ color: "black" }} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={"Compras clientes"}
+                  sx={{ color: "black" }}
+                />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+        )}
+
+        {user.rol === rolAdmin && (
           <Link to={"/dashboard"}>
             <ListItem disablePadding>
               <ListItemButton>
@@ -73,14 +91,30 @@ function Navbar(props) {
           </Link>
         )}
 
-        <ListItem disablePadding>
-          <ListItemButton onClick={handleLogOut}>
-            <ListItemIcon>
-              <LogoutIcon sx={{ color: "black" }} />
-            </ListItemIcon>
-            <ListItemText primary={"Cerrar sesion"} sx={{ color: "black" }} />
-          </ListItemButton>
-        </ListItem>
+        {isLogged ? (
+          <ListItem disablePadding>
+            <ListItemButton onClick={handleLogOut}>
+              <ListItemIcon>
+                <LogoutIcon sx={{ color: "black" }} />
+              </ListItemIcon>
+              <ListItemText primary={"Cerrar sesion"} sx={{ color: "black" }} />
+            </ListItemButton>
+          </ListItem>
+        ) : (
+          <Link to={"/login"}>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <PersonIcon sx={{ color: "black" }} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={"Iniciar sesión"}
+                  sx={{ color: "black" }}
+                />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+        )}
       </List>
     </div>
   );

@@ -1,39 +1,35 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../../context/AuthContext";
+import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../firebaseConfig";
-import { getDocs, collection, query, where } from "firebase/firestore";
-import "./UserOrders.css";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 
-const UserOrders = () => {
-  const [myOrders, setMyOrders] = useState([]);
-  const { user } = useContext(AuthContext);
+const AllUsersOrders = () => {
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     const ordersCollections = collection(db, "orders");
-    let ordersFiltered = query(
-      ordersCollections,
-      where("email", "==", user.email)
-    );
-    getDocs(ordersFiltered)
+    getDocs(ordersCollections)
       .then((res) => {
-        const newArr = res.docs.map((order) => {
-          return { ...order.data(), id: order.id };
-        });
-        setMyOrders(newArr);
+        const ordersArr = res.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setOrders(ordersArr);
       })
       .catch((error) => console.log(error));
-  }, [user.email]);
+  }, []);
 
   return (
     <div>
-      {myOrders.length === 0 ? (
+      {orders.length === 0 ? (
         <div>
           <h1
             style={{
@@ -42,19 +38,22 @@ const UserOrders = () => {
               textAlign: "center",
             }}
           >
-            Uups parece que todavia no tienes ninguna compra realizada
+            Uups parece que todavia no hay compras hechas
           </h1>
         </div>
       ) : (
         <div style={{ marginTop: 40 }}>
           <div className="boxTitleMyOrders">
-            <h1>Mis compras</h1>
+            <h1>Compras de todos los usuarios</h1>
           </div>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="tabla de compras">
               <TableHead>
                 <TableRow>
                   {/* <TableCell align="left">ID de Orden</TableCell> */}
+                  <TableCell align="left" style={{ fontSize: 25 }}>
+                    Email del Cliente
+                  </TableCell>
                   <TableCell align="left" style={{ fontSize: 25 }}>
                     Producto
                   </TableCell>
@@ -70,10 +69,13 @@ const UserOrders = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {myOrders.map((order) =>
+                {orders.map((order) =>
                   order.items.map((product) => (
                     <TableRow key={`${order.id}-${product.id}`}>
                       {/* <TableCell align="left">{order.id}</TableCell> */}
+                      <TableCell align="left" style={{ fontSize: 20 }}>
+                        {order.email}
+                      </TableCell>
                       <TableCell align="left" style={{ fontSize: 20 }}>
                         {product.title}
                       </TableCell>
@@ -106,4 +108,4 @@ const UserOrders = () => {
   );
 };
 
-export default UserOrders;
+export default AllUsersOrders;

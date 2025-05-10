@@ -12,6 +12,11 @@ import * as Yup from "yup";
 import ClipLoader from "react-spinners/ClipLoader";
 import "./Checkout.css";
 
+const BACKEND_URL =
+  import.meta.env.MODE === "production"
+    ? import.meta.env.VITE_BACKEND_URL_PROD
+    : import.meta.env.VITE_BACKEND_URL_DEV;
+
 const Checkout = () => {
   const { cart, getTotalPrice, clearCart } = useContext(CartContext);
   const { user } = useContext(AuthContext);
@@ -69,14 +74,11 @@ const Checkout = () => {
     try {
       // Enviamos los correos para cada producto con su PDF asociado
       const coursePromises = order.items.map((product) => {
-        return axios.post(
-          "https://backend-ivana-papurello.vercel.app/api/email/send-course-email",
-          {
-            email: order.email || user.email,
-            courseName: product.title,
-            pdfUrl: product.pdf,
-          }
-        );
+        return axios.post(`${BACKEND_URL}/api/email/send-course-email`, {
+          email: order.email || user.email,
+          courseName: product.title,
+          pdfUrl: product.pdf,
+        });
       });
 
       await Promise.allSettled(coursePromises);
@@ -102,12 +104,9 @@ const Checkout = () => {
     });
 
     try {
-      let res = await axios.post(
-        "https://backend-ivana-papurello.vercel.app/create_preference",
-        {
-          items: newArray,
-        }
-      );
+      let res = await axios.post(`${BACKEND_URL}/create_preference`, {
+        items: newArray,
+      });
 
       const { id } = res.data;
       return id;

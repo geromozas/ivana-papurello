@@ -8,6 +8,7 @@ import Dashboard from "../components/pages/dashboard/Dashboard.jsx";
 import ProtectedAdmin from "./ProtectedAdmin.jsx";
 import ProtectedUsers from "./ProtectedUsers.jsx";
 import Checkout from "../components/pages/checkout/Checkout.jsx";
+import AllUsersOrders from "../components/pages/userOrders/AllUsersOrders.jsx";
 
 const AppRouter = () => {
   return (
@@ -27,6 +28,12 @@ const AppRouter = () => {
       <Route element={<ProtectedAdmin />}>
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+      </Route>
+
+      <Route element={<ProtectedAdmin />}>
+        <Route element={<Layout />}>
+          <Route path="/all-users-orders" element={<AllUsersOrders />} />
         </Route>
       </Route>
 
