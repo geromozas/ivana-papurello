@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import Swal from "sweetalert2";
 
 export const CartContext = createContext();
 
@@ -10,25 +11,42 @@ const CartContextComponent = ({ children }) => {
   const addToCartContext = (product) => {
     let existe = cart.some((e) => e.id === product.id);
     if (existe) {
-      alert("Ya agregaste este producto al carrito");
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Ya agregaste este curso al carrito",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } else {
       localStorage.setItem("cart", JSON.stringify([...cart, product]));
       setCart([...cart, product]);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Curso agregado al carrito",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
   const clearCart = () => {
     setCart([]);
     localStorage.removeItem("cart");
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Carrito vaciado",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
   const deleteById = (id) => {
-    console.log("Estado actual del carrito: ", cart);
     const newArr = cart.filter((elemento) => elemento.id !== id);
-    console.log("Nuevo carrito despues de eliminar: ", newArr);
     localStorage.setItem("cart", JSON.stringify(newArr));
     setCart(newArr);
-    alert("El producto se elimino");
   };
 
   const getTotalPrice = () => {

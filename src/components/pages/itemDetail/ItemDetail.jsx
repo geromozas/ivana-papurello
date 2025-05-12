@@ -4,6 +4,7 @@ import { getDoc, collection, doc } from "firebase/firestore";
 import { db } from "../../../firebaseConfig.js";
 import ProductCardDetail from "../../productCard/ProductCardDetail.jsx";
 import { CartContext } from "../../../context/CartContext.jsx";
+// import Swal from "sweetalert2";
 
 const ItemDetail = () => {
   const { id } = useParams();
@@ -29,7 +30,6 @@ const ItemDetail = () => {
         ...product,
         quantity: 1,
       };
-      console.log("Producto añadido al carrito", obj);
       addToCartContext(obj);
     }
   };

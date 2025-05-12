@@ -37,7 +37,6 @@ const Login = () => {
     },
     onSubmit: async (data) => {
       try {
-        console.log("El formulario se envío");
         const res = await onSignIn(data);
         console.log(res);
         if (res.user) {
@@ -48,7 +47,6 @@ const Login = () => {
             email: res.user.email,
             rol: userDoc.data().rol,
           };
-          console.log(finalyUser);
           handleLogin(finalyUser);
           navigate("/");
         } else {
