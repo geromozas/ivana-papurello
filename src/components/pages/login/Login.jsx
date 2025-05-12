@@ -38,7 +38,6 @@ const Login = () => {
     onSubmit: async (data) => {
       try {
         const res = await onSignIn(data);
-        console.log(res);
         if (res.user) {
           const userCollection = collection(db, "users");
           const userRef = doc(userCollection, res.user.uid);

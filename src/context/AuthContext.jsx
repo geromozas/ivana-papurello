@@ -13,7 +13,6 @@ const AuthContextComponent = ({ children }) => {
 
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    // Simular recuperación de datos del localStorage
     const storedUser = JSON.parse(localStorage.getItem("userInfo"));
     const storedLogged = JSON.parse(localStorage.getItem("isLogged"));
 
@@ -22,7 +21,7 @@ const AuthContextComponent = ({ children }) => {
       setIsLogged(true);
     }
 
-    setLoading(false); // Ya terminó de cargar
+    setLoading(false);
   }, []);
 
   const handleLogin = (userLogged) => {

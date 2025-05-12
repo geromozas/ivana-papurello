@@ -13,6 +13,7 @@ import {
 import { getFirestore } from "firebase/firestore";
 
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import Swal from "sweetalert2";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -40,6 +41,13 @@ export const onSignIn = async ({ email, password }) => {
     return res;
   } catch (error) {
     console.log(error);
+    Swal.fire({
+      position: "center",
+      icon: "error",
+      title: "Email y/o contraseña incorrectos",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   }
 };
 
