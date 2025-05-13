@@ -220,39 +220,17 @@ const Checkout = () => {
       )}
 
       {preferenceId && (
-        <Wallet
-          initialization={{
-            preferenceId: preferenceId,
-          }}
-        />
+        <>
+          {console.log("Renderizando Wallet con ID:", preferenceId)}
+          <Wallet
+            initialization={{
+              preferenceId: preferenceId,
+            }}
+          />
+        </>
       )}
     </div>
   );
 };
 
 export default Checkout;
-// const handleBuy = async () => {
-// if (!cart.length) {
-//   console.warn("El carrito está vacío. No se puede crear la orden.");
-//   return;
-//   }
-// let order = {
-//   name: userData.name,
-//   lastName: userData.lastName,
-//   phone: userData.phone,
-//   items: cart,
-//   total: total,
-//   email: user.email,
-// };
-//   localStorage.setItem("order", JSON.stringify(order));
-//   const id = await createPreference();
-//   if (id) {
-//     setPreferenceId(id);
-//   } else {
-//     console.log("Error al realizar la compra");
-//   }
-// };
-
-// const handleChange = (e) => {
-//   setUserData({ ...userData, [e.target.name]: e.target.value });
-// };
