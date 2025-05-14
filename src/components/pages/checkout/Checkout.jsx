@@ -30,6 +30,7 @@ const Checkout = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
   const [emailError, setEmailError] = useState(null);
+  const [walletReady, setWalletReady] = useState(false);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -126,6 +127,7 @@ const Checkout = () => {
         console.warn("El carrito está vacío. No se puede crear la orden.");
         return;
       }
+
       let order = {
         name: values.name,
         lastName: values.lastName,
@@ -221,13 +223,22 @@ const Checkout = () => {
 
       {preferenceId && (
         <>
-          {console.log("Renderizando Wallet con ID:", preferenceId)}
-          <Wallet
-            initialization={{
-              preferenceId: preferenceId,
-              redirectMode: "self",
-            }}
-          />
+          {!walletReady && (
+            <div style={{ marginTop: 40, textAlign: "center" }}>
+              <ClipLoader color="#1976d2" size={40} />
+              <p>Cargando botón de pago...</p>
+            </div>
+          )}
+
+          <div style={{ visibility: walletReady ? "visible" : "hidden" }}>
+            <Wallet
+              initialization={{
+                preferenceId: preferenceId,
+                redirectMode: "self",
+              }}
+              onReady={() => setWalletReady(true)}
+            />
+          </div>
         </>
       )}
     </div>
