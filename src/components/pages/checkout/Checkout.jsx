@@ -225,6 +225,7 @@ const Checkout = () => {
           <Wallet
             initialization={{
               preferenceId: preferenceId,
+              redirectMode: "self",
             }}
           />
         </>
