@@ -42,7 +42,7 @@ const Footer = () => {
         <div style={{ color: "white" }} className="subBoxFooter">
           <h4 style={{ color: "#d1a4ac" }}>Contacto</h4>
           <div>
-            <a href="mailto:mozasgeronimo@gmail.com" style={{ color: "white" }}>
+            <a href="mailto:papurelloiva@gmail.com" style={{ color: "white" }}>
               <IconButton>
                 <EmailIcon />
               </IconButton>
