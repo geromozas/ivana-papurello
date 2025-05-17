@@ -12,7 +12,12 @@ const ProductCardCart = ({ title, unit_price, image, id }) => {
         <img className="imgCart" src={image} alt="" />
         <div className="boxImgTitlePrice">
           <h4 className="titleProductCart">{title}</h4>
-          <p>${unit_price}</p>
+          <p>
+            {Number(unit_price).toLocaleString("es-AR", {
+              style: "currency",
+              currency: "ARS",
+            })}
+          </p>
         </div>
         <div>
           <Button

@@ -66,7 +66,10 @@ export default function ProductCard({
           component="div"
           sx={{ height: 10 }}
         >
-          ${unit_price}
+          {Number(unit_price).toLocaleString("es-AR", {
+            style: "currency",
+            currency: "ARS",
+          })}
         </Typography>
       </CardContent>
       <CardActions sx={{ padding: 2 }}>

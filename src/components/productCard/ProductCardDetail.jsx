@@ -28,7 +28,13 @@ const ProductCardDetail = ({
                 </span>
               ))}
             </p>
-            <h3 className="cardDetailPrice">${unit_price}</h3>
+            <h3 className="cardDetailPrice">
+              {" "}
+              {Number(unit_price).toLocaleString("es-AR", {
+                style: "currency",
+                currency: "ARS",
+              })}
+            </h3>
             <div className="boxButtonsDetail">
               <Button
                 size={isLargeScreen ? "large" : "small"}

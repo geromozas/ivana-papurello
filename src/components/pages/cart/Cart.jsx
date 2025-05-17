@@ -65,10 +65,16 @@ const Cart = () => {
               <div className="boxTotalOrder" style={{ marginBottom: 50 }}>
                 <h2 style={{ marginTop: 25 }}>Resumen del pedido</h2>
                 <hr style={{ marginBottom: 10, marginTop: 10 }} />
-                <h3 style={{ marginBottom: 20 }}>Total: ${total}</h3>
+                <h3 style={{ marginBottom: 20 }}>
+                  Total:
+                  {Number(total).toLocaleString("es-AR", {
+                    style: "currency",
+                    currency: "ARS",
+                  })}
+                </h3>
                 <div className="boxPay">
                   <Link to="/checkout">
-                    <Button variant="outlined">Proceder al pago</Button>
+                    <Button variant="contained">Proceder al pago</Button>
                   </Link>
                   <p style={{ marginTop: 10 }}>Pago 100% seguro</p>
                 </div>
