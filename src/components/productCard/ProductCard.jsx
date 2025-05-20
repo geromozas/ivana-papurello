@@ -44,13 +44,12 @@ export default function ProductCard({
           variant="h5"
           component="div"
           sx={{ height: 50 }}
-          // style={{ marginBottom: 10 }}
         >
           {title}
         </Typography>
         <Typography
           variant="body2"
-          sx={{ color: "text.secondary", height: 110 }}
+          sx={{ color: "text.secondary", height: 150 }}
           style={{
             display: "flex",
             alignItems: "start",
